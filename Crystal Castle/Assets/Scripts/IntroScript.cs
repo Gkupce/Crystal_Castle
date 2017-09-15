@@ -9,6 +9,7 @@ public class IntroScript : MonoBehaviour {
 
 	public UnityEngine.UI.Text dialogue;
 	private Script script = new Script ();
+	private Animator anim;
 
 	private int counter = -1;
 	private int akaiCounter = -1;
@@ -27,6 +28,12 @@ public class IntroScript : MonoBehaviour {
 
 
 
+	private void Start () {
+		anim = GetComponent<Animator> ();
+	}
+
+
+
 	private void OnDestroy () {
 		if (Instance == this)
 			Instance = null;
@@ -35,14 +42,14 @@ public class IntroScript : MonoBehaviour {
 
 
 	public void Init () {
-		GetComponent<Animator> ().SetTrigger ("On");
+		anim.SetTrigger ("On");
 		run = true;
 	}
 
 
 
 	private void Update () {
-		if (run && Input.GetKeyDown (KeyCode.Space))
+		if (run && (Input.GetKeyDown (KeyCode.Space) || Input.GetMouseButtonDown(0)))
 			Next ();
 	}
 
@@ -68,6 +75,8 @@ public class IntroScript : MonoBehaviour {
 
 
 	private void End () {
-		gameObject.SetActive (false);
+		anim.SetTrigger ("Off");
+		enabled = false;
+		//gameObject.SetActive (false);
 	}
 }
