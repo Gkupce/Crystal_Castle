@@ -60,10 +60,10 @@ public class IntroScript : MonoBehaviour {
 			return;
 		}
 
-		if (script.intro [counter] == Enums.Character.Akai) {
-			ChangeText ("Akai-\n" + script.akai1 [++akaiCounter]);
-		} else if (script.intro [counter] == Enums.Character.Aoi) {
-			ChangeText ("Aoi-\n" + script.aoi1 [++aoiCounter]);
+		if (script.intro [counter] == Enums.Character.Aoi) {
+			ChangeText ("Akai-\n" + script.aoi1 [++akaiCounter]);
+		} else if (script.intro [counter] == Enums.Character.Saki) {
+			ChangeText ("Aoi-\n" + script.saki1 [++aoiCounter]);
 
 		}
 	}

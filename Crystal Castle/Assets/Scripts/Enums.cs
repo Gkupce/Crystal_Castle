@@ -5,8 +5,8 @@ using UnityEngine;
 public class Enums {
 
 	public enum Character {
-		Akai = 0,
-		Aoi = 1
+		Aoi = 0,
+		Saki = 1
 	}
 
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Script {
 
 
-	public string[] akai1 = { 	"Nanny's castle",
+	public string[] aoi1 = { 	"Nanny's castle",
 								"Think we made it in time?",
 								"WHA-",
 								"WHA-WHAT HAPPENED HERE???",
@@ -20,7 +20,7 @@ public class Script {
 							};
 
 
-	public string[] aoi1 = { 	"I don't know but,",
+	public string[] saki1 = { 	"I don't know but,",
 								"let's hurry before the castle",
 								"starts stinking to him.",
 								"The Lord propably is on the last floor.",
@@ -38,15 +38,15 @@ public class Script {
 
 
 	public Enums.Character[] intro = 	{	
-											Enums.Character.Akai, Enums.Character.Akai,
-											Enums.Character.Aoi, Enums.Character.Aoi, Enums.Character.Aoi, Enums.Character.Aoi, Enums.Character.Aoi,
-											Enums.Character.Akai, Enums.Character.Akai,
-											Enums.Character.Aoi, Enums.Character.Aoi, Enums.Character.Aoi,
-											Enums.Character.Akai, Enums.Character.Akai,
-											Enums.Character.Aoi, Enums.Character.Aoi, Enums.Character.Aoi, Enums.Character.Aoi,
-											Enums.Character.Akai, Enums.Character.Akai, Enums.Character.Akai, Enums.Character.Akai,
 											Enums.Character.Aoi, Enums.Character.Aoi,
-											Enums.Character.Akai, Enums.Character.Akai
+											Enums.Character.Saki, Enums.Character.Saki, Enums.Character.Saki, Enums.Character.Saki, Enums.Character.Saki,
+											Enums.Character.Aoi, Enums.Character.Aoi,
+											Enums.Character.Saki, Enums.Character.Saki, Enums.Character.Saki,
+											Enums.Character.Aoi, Enums.Character.Aoi,
+											Enums.Character.Saki, Enums.Character.Saki, Enums.Character.Saki, Enums.Character.Saki,
+											Enums.Character.Aoi, Enums.Character.Aoi, Enums.Character.Aoi, Enums.Character.Aoi,
+											Enums.Character.Saki, Enums.Character.Saki,
+											Enums.Character.Aoi, Enums.Character.Aoi
 										};
 
 }
