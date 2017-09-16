@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class PlayerMover : MonoBehaviour {
 	public float maxSpeed = 1.0f;
+    Rigidbody2D rBody;
 
 	// Use this for initialization
 	void Start () {
-		
+        rBody = GetComponent<Rigidbody2D>();
 	}
 	
 	// Update is called once per frame
@@ -19,9 +20,13 @@ public class PlayerMover : MonoBehaviour {
 		}
 		if(direction.magnitude > 0.01f)
 		{
-			transform.position += direction * maxSpeed * Time.deltaTime;
-		}
-		checkAnimation(direction);
+            rBody.velocity = direction * maxSpeed;
+        }
+        else
+        {
+            rBody.velocity = Vector3.zero;
+        }
+        checkAnimation(direction);
 	}
 
 	void checkAnimation(Vector3 direction)
