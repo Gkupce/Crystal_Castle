@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 9c2478048285a8545a5f5ed98b99960b
-timeCreated: 1505435667
+timeCreated: 1505565460
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -1031,7 +1031,7 @@ TextureImporter:
     21302048: roguelikeSheet_transparent_1024
     21302050: roguelikeSheet_transparent_1025
     21302052: roguelikeSheet_transparent_1026
-    21302054: roguelikeSheet_transparent_1027
+    21302054: Stairs up
     21302056: roguelikeSheet_transparent_1028
     21302058: roguelikeSheet_transparent_1029
     21302060: roguelikeSheet_transparent_1030
@@ -16181,7 +16181,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: roguelikeSheet_transparent_1027
+      name: Stairs up
       rect:
         serializedVersion: 2
         x: 476

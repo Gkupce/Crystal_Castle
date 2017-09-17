@@ -28,7 +28,7 @@ public class PlayerMover : MonoBehaviour {
         }
         checkAnimation(direction);
 	}
-
+	
 	void checkAnimation(Vector3 direction)
 	{
 		if (direction.magnitude > 0.01f)
@@ -62,7 +62,7 @@ public class PlayerMover : MonoBehaviour {
 			gameObject.GetComponent<Animator>().SetBool("Walking", false);
 		}
 	}
-
+	
 	enum AnimDir
 	{
 		Down = 0,
