@@ -7,13 +7,27 @@ public class Projectile : MonoBehaviour {
     Rigidbody2D rBody;
     public float speed = 10f;
 
-	// Use this for initialization
+    float deleteTimer = 5f;
+    
 	void Start () {
         rBody = GetComponent<Rigidbody2D>();
 	}
 	
-	// Update is called once per frame
 	void FixedUpdate () {
         rBody.velocity = transform.up * speed;
 	}
+
+    private void OnEnable()
+    {
+        deleteTimer = 5f;
+    }
+
+    private void Update()
+    {
+        deleteTimer -= Time.deltaTime;
+        if (deleteTimer <= 0)
+        {
+            gameObject.SetActive(false);
+        }
+    }
 }

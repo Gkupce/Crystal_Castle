@@ -11,6 +11,7 @@ public class EnemyHealth : MonoBehaviour {
         health -= ammount;
         if (health <= 0)
         {
+            ParticleManager.instance.EmitAt("EnemyExplosion",transform.position,10);
             Destroy(gameObject);
         }
     }

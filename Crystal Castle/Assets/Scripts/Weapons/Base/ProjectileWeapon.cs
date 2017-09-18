@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class ProjectileWeapon : Weapon {
 
     public GameObject projectile;
-    List<GameObject> projectiles;
+    List<GameObject> projectiles = new List<GameObject>();
 
     protected void Shoot()
     {
@@ -33,5 +33,11 @@ public class ProjectileWeapon : Weapon {
         GameObject go = Instantiate(projectile);
         projectiles.Add(go);
         return go;
+    }
+
+    public override void OnFireDown()
+    {
+        base.OnFireDown();
+        Shoot();
     }
 }
