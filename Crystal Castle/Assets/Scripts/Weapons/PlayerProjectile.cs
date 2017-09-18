@@ -12,12 +12,8 @@ public class PlayerProjectile : Projectile {
         if (collision.tag == "Enemy")
         {
             collision.GetComponent<EnemyHealth>().TakeDamage(damage);
-            OnHit();
         }
-        else if (collision.tag != "Player")
-        {
-            OnHit();
-        }
+        OnHit();
     }
 
     void OnHit()
