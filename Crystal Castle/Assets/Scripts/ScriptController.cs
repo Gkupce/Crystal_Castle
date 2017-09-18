@@ -28,7 +28,6 @@ public class ScriptController : StoryPart {
 
 	public override void Init () {
 		anim.SetTrigger ("On");
-		run = true;
 	}
 
 
@@ -40,7 +39,8 @@ public class ScriptController : StoryPart {
 
 
 	public override void Next () {
-		if (++counter >= Script.Intro.Length) {
+        run = true;
+        if (++counter >= Script.Intro.Length) {
 			End ();
 			return;
 		}
