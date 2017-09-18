@@ -13,6 +13,10 @@ public class PlayerMover : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if(!GameController.Instance.allowControll)
+        {
+            return;
+        }
 		Vector3 direction = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
 		if(direction.magnitude > 1)
 		{
@@ -28,7 +32,7 @@ public class PlayerMover : MonoBehaviour {
         }
         checkAnimation(direction);
 	}
-
+	
 	void checkAnimation(Vector3 direction)
 	{
 		if (direction.magnitude > 0.01f)
@@ -62,7 +66,7 @@ public class PlayerMover : MonoBehaviour {
 			gameObject.GetComponent<Animator>().SetBool("Walking", false);
 		}
 	}
-
+	
 	enum AnimDir
 	{
 		Down = 0,
