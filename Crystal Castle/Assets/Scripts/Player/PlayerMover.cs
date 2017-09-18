@@ -13,6 +13,10 @@ public class PlayerMover : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if(!GameController.Instance.allowControll)
+        {
+            return;
+        }
 		Vector3 direction = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
 		if(direction.magnitude > 1)
 		{
