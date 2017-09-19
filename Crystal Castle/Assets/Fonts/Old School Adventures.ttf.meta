@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: d77df5755f07e4f13aeb8a6ad291c0a0
+timeCreated: 1505355785
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Old School Adventures
+  fontNames:
+  - Old School Adventures
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
