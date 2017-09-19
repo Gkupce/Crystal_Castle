@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class ScenesList {
 
-	public enum Scenes {
-		MENU = 0,
-		GAME = 1
-	}
+	
 
 }

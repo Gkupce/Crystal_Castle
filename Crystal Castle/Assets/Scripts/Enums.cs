@@ -9,4 +9,11 @@ public class Enums {
 		Saki = 1
 	}
 
+
+    public enum Scenes {
+        MENU = 0,
+        CINEMATICS = 1,
+        GAME = 2
+    }
+
 }

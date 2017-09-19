@@ -60,11 +60,11 @@ public abstract class CharacterScript : MonoBehaviour {
 
 
 	protected virtual void InitDialogue () {
-		ScriptController.Instance.Init ();
+		StoryIntro.Instance.Init ();
 	}
 		
 
 	protected void Continue() {
-		ScriptController.Instance.Next ();
+		StoryIntro.Instance.Next ();
 	}
 }
