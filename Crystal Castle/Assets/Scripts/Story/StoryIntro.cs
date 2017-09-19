@@ -9,8 +9,10 @@ public class StoryIntro : StoryPart {
 
 	public UnityEngine.UI.Text dialogue;
 	private Animator anim;
+    public Animator fade;
 
-	private int counter = -1;
+
+    private int counter = -1;
 
 	private bool run = false;
 
@@ -66,8 +68,15 @@ public class StoryIntro : StoryPart {
 	public override void End () {
 		anim.SetTrigger ("Off");
 		enabled = false;
-        Invoke("NextScene", 1.50f);
+        StartCoroutine(Finish());
+    }
 
+
+    IEnumerator Finish() {
+        yield return new WaitForSeconds(1f);
+        fade.SetTrigger("FadeOut");
+        yield return new WaitForSeconds(1f);
+        NextScene();
     }
 
 
