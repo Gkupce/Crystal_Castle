@@ -25,4 +25,12 @@ public class BatMovement : MonoBehaviour {
             rBody.velocity = Vector3.zero;
         }
 	}
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Player")
+        {
+            collision.GetComponent<Health>().TakeDamage(10f);
+        }
+    }
 }

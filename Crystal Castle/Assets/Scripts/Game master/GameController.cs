@@ -1,20 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
     public static GameController Instance;
 
     public bool allowControll {
 		get {
-			return !(inCinematic || pause);
+			return !(inCinematic || pause || playerIsDead);
 		}
 	}
     
 	public bool pause = false;
 	public bool inCinematic = true;
+    private bool playerIsDead = false;
 
 	private cinematics currentCinematic = cinematics.FadeIn;
+
+    Animator anim;
 
     private void Awake()
     {
@@ -25,6 +29,7 @@ public class GameController : MonoBehaviour {
             }
         #endif
         Instance = this;
+        anim = GetComponent<Animator>();
     }
 
     public void StartCinematic(cinematics cinematicToStart)
@@ -57,4 +62,18 @@ public class GameController : MonoBehaviour {
 		GoingToStairs,
 		None
 	}
+
+    public void PlayerDied()
+    {
+        playerIsDead = true;
+        StartCoroutine(DeathRoutine());
+    }
+
+    IEnumerator DeathRoutine()
+    {
+        yield return new WaitForSeconds(1f);
+        anim.SetTrigger("FadeOut");
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene(0);
+    }
 }
