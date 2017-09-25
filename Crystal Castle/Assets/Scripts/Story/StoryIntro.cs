@@ -36,7 +36,7 @@ public class StoryIntro : StoryPart {
 
 
 	protected override void OnUpdate () {
-		if (run && (Input.GetKeyDown (KeyCode.Space) || Input.GetMouseButtonDown(0)))
+		if (run && (Input.GetKeyDown (KeyCode.Space) || Input.GetButtonDown("Fire1")))
 			Next ();
 	}
 
