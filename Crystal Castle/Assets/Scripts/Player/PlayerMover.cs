@@ -1,11 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMover : MonoBehaviour {
 	public float maxSpeed = 1.0f;
     Rigidbody2D rBody;
-
+	
 	// Use this for initialization
 	void Start () {
         rBody = GetComponent<Rigidbody2D>();
@@ -66,7 +67,7 @@ public class PlayerMover : MonoBehaviour {
 			gameObject.GetComponent<Animator>().SetBool("Walking", false);
 		}
 	}
-	
+
 	enum AnimDir
 	{
 		Down = 0,
