@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class Weapon : MonoBehaviour {
     
 	void Update () {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButton("Fire1"))
         {
-            OnFireDown();
+			StartCoroutine(Fire());
         }
         if (Input.GetButtonUp("Fire1"))
         {
@@ -13,6 +14,12 @@ public class Weapon : MonoBehaviour {
         }
         OnUpdate();
     }
+
+	IEnumerator Fire()
+	{
+		OnFireDown();
+		yield return new WaitForSeconds(0.7f);
+	}
 
     public virtual void OnFireDown() { }
     public virtual void OnFireUp() { }
