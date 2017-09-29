@@ -49,6 +49,7 @@ public class GameController : MonoBehaviour {
 				}
 			}
 			pause = !pause;
+			anim.SetBool("Paused", pause);
 		}
 	}
 
