@@ -16,6 +16,11 @@ public class BatMovement : MonoBehaviour {
 	}
 	
 	void Update () {
+		if(!GameController.Instance.allowControll)
+		{
+			return;
+		}
+
 		if(Vector3.Distance(playerTransform.position,transform.position) < attackRange)
         {
             rBody.velocity = (playerTransform.position - transform.position).normalized * movementSpeed;
