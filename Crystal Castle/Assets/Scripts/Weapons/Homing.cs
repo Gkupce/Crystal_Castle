@@ -30,6 +30,7 @@ public class Homing : MonoBehaviour {
 
     IEnumerator GetTarget()
     {
+        rotSpeed = 0f;
         while(target == null)
         {
             foreach(Collider2D c in Physics2D.OverlapCircleAll(transform.position, 10f, targetLayer))

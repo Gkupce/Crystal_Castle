@@ -14,7 +14,10 @@ public class Projectile : MonoBehaviour {
 	}
 	
 	void FixedUpdate () {
-        rBody.velocity = transform.up * speed;
+		if(!GameController.Instance.pause)
+		{
+			rBody.velocity = transform.up * speed;
+		}
 	}
 
     private void OnEnable()
