@@ -35,6 +35,6 @@ public class SakisPart : CharacterScript {
 
 
 	public void PlayExalt () {
-		anim.SetTrigger ("Exalt");
+		//anim.SetTrigger ("Exalt");
 	}
 }

@@ -32,7 +32,28 @@ public class GameController : MonoBehaviour {
         anim = GetComponent<Animator>();
     }
 
-    public void StartCinematic(cinematics cinematicToStart)
+	private void Update()
+	{
+		if (Input.GetButtonUp("Pause"))
+		{
+			Pausable[] pausables = GameObject.FindObjectsOfType<Pausable>();
+			foreach (Pausable p in pausables)
+			{
+				if (pause)
+				{
+					p.Unpause();
+				}
+				else
+				{
+					p.Pause();
+				}
+			}
+			pause = !pause;
+			anim.SetBool("Paused", pause);
+		}
+	}
+
+	public void StartCinematic(cinematics cinematicToStart)
 	{
 		inCinematic = true;
 		currentCinematic = cinematicToStart;
@@ -51,8 +72,7 @@ public class GameController : MonoBehaviour {
 			inCinematic = false;
 		}
 	}
-
-
+	
 	public enum cinematics
 	{
 		Start,
