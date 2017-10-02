@@ -4,9 +4,9 @@ using System.Collections;
 public class Weapon : MonoBehaviour {
     
 	void Update () {
-        if (Input.GetButton("Fire1"))
+        if (Input.GetButtonDown("Fire1"))
         {
-			StartCoroutine(Fire());
+            OnFireDown();
         }
         if (Input.GetButtonUp("Fire1"))
         {
@@ -14,12 +14,6 @@ public class Weapon : MonoBehaviour {
         }
         OnUpdate();
     }
-
-	IEnumerator Fire()
-	{
-		OnFireDown();
-		yield return new WaitForSeconds(0.7f);
-	}
 
     public virtual void OnFireDown() { }
     public virtual void OnFireUp() { }
