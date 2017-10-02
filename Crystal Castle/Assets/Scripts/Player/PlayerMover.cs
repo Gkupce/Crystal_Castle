@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class PlayerMover : MonoBehaviour {
 	public float maxSpeed = 1.0f;
-    Rigidbody2D rBody;
+    private Rigidbody2D rBody;
+	private Animator anim;
 
-	// Use this for initialization
-	void Start () {
+
+
+	private void Start () {
         rBody = GetComponent<Rigidbody2D>();
+		anim = GetComponent<Animator> ();
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+
+
+	private void Update () {
         if(!GameController.Instance.allowControll)
         {
             return;
@@ -32,9 +36,12 @@ public class PlayerMover : MonoBehaviour {
         }
         checkAnimation(direction);
 	}
-	
-	void checkAnimation(Vector3 direction)
+
+
+
+	private void checkAnimation(Vector3 direction)
 	{
+		
 		if (direction.magnitude > 0.01f)
 		{
 			gameObject.GetComponent<Animator>().SetBool("Walking", true);
@@ -42,30 +49,36 @@ public class PlayerMover : MonoBehaviour {
 			{//Horizontal
 				if (direction.x > 0)
 				{//Right
-					gameObject.GetComponent<Animator>().SetInteger("Dir", (int)AnimDir.Right);
+					anim.SetInteger("Dir", (int)AnimDir.Right);
 				}
 				else
 				{//Left
-					gameObject.GetComponent<Animator>().SetInteger("Dir", (int)AnimDir.Left);
+					anim.SetInteger("Dir", (int)AnimDir.Left);
 				}
 			}
 			else
 			{//Vertical
 				if (direction.y > 0)
 				{//Up
-					gameObject.GetComponent<Animator>().SetInteger("Dir", (int)AnimDir.Up);
+					anim.SetInteger("Dir", (int)AnimDir.Up);
 				}
 				else
 				{//Down
-					gameObject.GetComponent<Animator>().SetInteger("Dir", (int)AnimDir.Down);
+					anim.SetInteger("Dir", (int)AnimDir.Down);
 				}
 			}
 		}
 		else
 		{
-			gameObject.GetComponent<Animator>().SetBool("Walking", false);
+			anim.SetBool("Walking", false);
+		}
+
+		if (Input.GetButtonDown("Fire2"))
+		{
+			anim.SetTrigger("Feint");
 		}
 	}
+
 	
 	enum AnimDir
 	{
