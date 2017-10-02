@@ -49,7 +49,7 @@ public class GemManager : MonoBehaviour {
                 transform.Find("Normal").GetComponent<AutomaticProjectileWeapon>().ReduseCooldown(0.05f);
                 break;
             case GemType.Homing:
-                transform.Find("Homing").GetComponent<AutomaticProjectileWeapon>().enabled = true;
+				transform.Find("Homing").GetComponent<AutomaticProjectileWeapon>().canAttack = true;
                 transform.Find("Homing").GetComponent<AutomaticProjectileWeapon>().ReduseCooldown(0.1f);
                 break;
         }

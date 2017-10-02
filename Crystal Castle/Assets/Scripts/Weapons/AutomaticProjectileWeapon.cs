@@ -23,6 +23,9 @@ public class AutomaticProjectileWeapon : ProjectileWeapon
     public override void OnUpdate()
     {
         actualCooldown = Mathf.Clamp(actualCooldown-Time.deltaTime,0,actualCooldown);
+		if (canAttack == false) {
+			return;
+		}
         if (isFiring)
         {
             if (actualCooldown <= 0)
