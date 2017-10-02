@@ -7,6 +7,10 @@ public class PlayerMover : MonoBehaviour {
     private Rigidbody2D rBody;
 	private Animator anim;
 
+	public ParticleSystem sweatParticles;
+	public float feintCooldown;
+	private bool feintAvailable = true;
+
 
 
 	private void Start () {
@@ -73,10 +77,24 @@ public class PlayerMover : MonoBehaviour {
 			anim.SetBool("Walking", false);
 		}
 
-		if (Input.GetButtonDown("Fire2"))
+		if (feintAvailable && Input.GetButtonDown("Fire2"))
 		{
 			anim.SetTrigger("Feint");
+			feintAvailable = false;
 		}
+	}
+
+
+	IEnumerator ActivateFeint(int i){
+		yield return new WaitForSeconds(feintCooldown);
+		feintAvailable = true;
+		sweatParticles.Stop ();
+	}
+
+
+	private void StartSweating(){
+		sweatParticles.Play ();
+		StartCoroutine (ActivateFeint(0));
 	}
 
 	
