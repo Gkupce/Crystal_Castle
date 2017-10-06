@@ -28,7 +28,7 @@ public abstract class StoryPart : MonoBehaviour {
 
 
 	private void Update () {
-		if (Input.GetKeyDown (KeyCode.Escape))
+		if (Input.GetButtonDown("Cancel"))
 			End ();
 		OnUpdate ();
 	}
