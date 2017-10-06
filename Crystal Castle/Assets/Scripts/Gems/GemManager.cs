@@ -8,7 +8,8 @@ public class GemManager : MonoBehaviour {
     {
         None,
         Speed,
-        Homing
+        Homing,
+		Bouncing
     }
 
     GemType[] types = new GemType[2] { GemType.None, GemType.None };
@@ -46,12 +47,15 @@ public class GemManager : MonoBehaviour {
         switch (gemType)
         {
             case GemType.Speed:
-                transform.Find("Normal").GetComponent<AutomaticProjectileWeapon>().ReduseCooldown(0.05f);
+                transform.Find("Normal").GetComponent<AutomaticProjectileWeapon>().ReduceCooldown(0.05f);
                 break;
             case GemType.Homing:
 				transform.Find("Homing").GetComponent<AutomaticProjectileWeapon>().canAttack = true;
-                transform.Find("Homing").GetComponent<AutomaticProjectileWeapon>().ReduseCooldown(0.1f);
+                transform.Find("Homing").GetComponent<AutomaticProjectileWeapon>().ReduceCooldown(0.1f);
                 break;
+			case GemType.Bouncing:
+				transform.Find("Bouncing").GetComponent<AutomaticProjectileWeapon>().AddBounce();
+				break;
         }
     }
 

@@ -7,17 +7,17 @@ public class PlayerProjectile : Projectile {
     public float damage = 1;
 
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag == "Enemy")
-        {
-            collision.GetComponent<EnemyHealth>().TakeDamage(damage);
-        }
-        OnHit();
+    private void OnTriggerEnter2D (Collider2D collision) {
+		if (collision.tag == "Enemy") {
+			collision.GetComponent<EnemyHealth> ().TakeDamage (damage);
+			OnHit ();
+		} else if (collision.tag == "Terrain" && GetComponent<AutomaticProjectileWeapon> ().ReduceBounces ()) {
+			OnHit ();
+		}
     }
 
-    void OnHit()
-    {
+    void OnHit () {
+		//Reset
         gameObject.SetActive(false);
         ParticleManager.instance.EmitAt("BulletHit", transform.position, 5);
     }
