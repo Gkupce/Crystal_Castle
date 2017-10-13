@@ -36,7 +36,7 @@ public class StoryIntro : StoryPart {
 
 
 	protected override void OnUpdate () {
-		if (run && (Input.GetButtonDown("Proceed") || Input.GetButtonDown("Fire1")))
+		if (run && (Input.GetButtonDown("Proceed") || Input.GetButtonDown("Fire")))
 			Next ();
 	}
 

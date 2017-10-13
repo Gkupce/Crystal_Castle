@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMover : MonoBehaviour {
 	public float maxSpeed = 1.0f;
-    private Rigidbody2D rBody;
+	private Rigidbody2D rBody;
 	private Animator anim;
 
 	public ParticleSystem sweatParticles;
@@ -14,17 +14,17 @@ public class PlayerMover : MonoBehaviour {
 
 
 	private void Start () {
-        rBody = GetComponent<Rigidbody2D>();
+		rBody = GetComponent<Rigidbody2D>();
 		anim = GetComponent<Animator> ();
 	}
 
 
 
 	private void Update () {
-        if(!GameController.Instance.allowControll)
-        {
-            return;
-        }
+		if(!GameController.Instance.allowControll)
+		{
+			return;
+		}
 		Vector3 direction = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
 		if(direction.magnitude > 1)
 		{
@@ -32,13 +32,13 @@ public class PlayerMover : MonoBehaviour {
 		}
 		if(direction.magnitude > 0.01f)
 		{
-            rBody.velocity = direction * maxSpeed;
-        }
-        else
-        {
-            rBody.velocity = Vector3.zero;
-        }
-        checkAnimation(direction);
+			rBody.velocity = direction * maxSpeed;
+		}
+		else
+		{
+			rBody.velocity = Vector3.zero;
+		}
+		checkAnimation(direction);
 	}
 
 
@@ -77,7 +77,7 @@ public class PlayerMover : MonoBehaviour {
 			anim.SetBool("Walking", false);
 		}
 
-		if (feintAvailable && Input.GetButtonDown("Fire2"))
+		if (feintAvailable && Input.GetButtonDown("Feint"))
 		{
 			anim.SetTrigger("Feint");
 			feintAvailable = false;
