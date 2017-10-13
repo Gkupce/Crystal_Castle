@@ -9,8 +9,6 @@ public class AutomaticProjectileWeapon : ProjectileWeapon
     public float minimumCooldown = 0.05f;
     float coolDownReduction = 0f;
     float actualCooldown = 0f;
-	int bounces = 0;
-	int actualBounces = 0;
 
     public override void OnFireDown()
     {
@@ -46,26 +44,9 @@ public class AutomaticProjectileWeapon : ProjectileWeapon
             actualCooldown = Mathf.Min(actualCooldown, fireCooldown - coolDownReduction);
         }
     }
-
+    /*
 	public void RemoveCooldown () {
 		coolDownReduction = 0.0f;
-	}
-
-	public bool ReduceBounces () {
-		return --actualBounces <= 0;
-	}
-
-	public void ResetBounces () {
-		actualBounces = bounces;
-	}
-
-	public void AddBounce () {
-		bounces++;
-	}
-
-	public void RemoveBounces () {
-		bounces = 0;
-		ResetBounces ();
 	}
 
 	public void RemoveProperty (GemManager.GemType type) {
@@ -77,5 +58,5 @@ public class AutomaticProjectileWeapon : ProjectileWeapon
 				RemoveBounces ();
 				break;
 		}
-	}
+	}*/
 }
