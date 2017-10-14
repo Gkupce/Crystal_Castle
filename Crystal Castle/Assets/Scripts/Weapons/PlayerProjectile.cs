@@ -6,26 +6,28 @@ public class PlayerProjectile : Projectile {
 
     public float damage = 1;
     public int bounces = 0;
+	public float poisonDamage = 0f;
 
-    private void OnTriggerEnter2D (Collider2D collision) {
-        if (collision.tag == "Enemy")
+
+	private void OnTriggerEnter2D (Collider2D collider) {
+        if (collider.tag == "Enemy")
         {
-            collision.GetComponent<EnemyHealth>().TakeDamage(damage);
-            OnHit();
+            collider.GetComponent<EnemyHealth>().TakeDamage(damage);
+            OnHit(collider);
         }
         else if (bounces > 0)
         {
             bounces--;
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, collision.transform.position - transform.position,10f,(1 << collision.gameObject.layer));
-            if(hit.collider != null && hit.transform == collision.transform)
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, collider.transform.position - transform.position,10f,(1 << collider.gameObject.layer));
+            if(hit.collider != null && hit.transform == collider.transform)
             {
                 transform.up = Vector3.Reflect(transform.up,hit.normal);
-                Debug.DrawRay(hit.point,hit.normal,Color.red,5f);
+                Debug.DrawRay(hit.point, hit.normal, Color.red, 5f);
             }
         }
         else
         {
-            OnHit();
+            OnHit(collider);
         }
     }
 
@@ -39,13 +41,17 @@ public class PlayerProjectile : Projectile {
         }
         else
         {
-            OnHit();
+			OnHit(collision.collider);
         }
     }
 
-    void OnHit () {
+	void OnHit (Collider2D collider) {
         //Reset
         bounces = 0;
+
+		if (poisonDamage != 0f && collider.gameObject.tag == "Enemy")
+			StartCoroutine (collider.gameObject.GetComponent<EnemyHealth>().Poisoned(poisonDamage));
+
         gameObject.SetActive(false);
         ParticleManager.instance.EmitAt("BulletHit", transform.position, 5);
     }

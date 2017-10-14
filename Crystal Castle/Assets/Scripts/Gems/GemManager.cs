@@ -9,7 +9,8 @@ public class GemManager : MonoBehaviour {
         None,
         Speed,
         Homing,
-		Bouncing
+		Bouncing,
+		Poison
     }
 
     GemType[] types = new GemType[2] { GemType.None, GemType.None };
