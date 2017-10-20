@@ -57,7 +57,6 @@ public class ProjectileWeapon : Weapon {
 			case GemManager.GemType.Poison:
 				PlayerProjectile p2 = bullet.GetComponent<PlayerProjectile> ();
 				p2.poisonDamage = gemManager.Amounts [i] * POISON_DAMAGE;
-				print ("DAM " + p2.poisonDamage);
 					p2.enabled = true;
 					break;
             }

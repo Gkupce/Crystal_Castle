@@ -5,11 +5,11 @@ using UnityEngine;
 public class Health : MonoBehaviour {
 
     public float health = 5f;
+	private bool poisoned = false;
 
 
     public void TakeDamage(float ammount)
     {
-		print ("P");
         if (health > 0)
         {
             health -= ammount;
@@ -24,13 +24,20 @@ public class Health : MonoBehaviour {
     protected virtual void OnDeath() {	}
 
 
-	public IEnumerator Poisoned(float amount) {
+	public void SetPoison(float amount) {
+		if (!poisoned) {
+			poisoned = true;
+			StartCoroutine (Poisoned (amount));
+		}
+	}
+
+
+	IEnumerator Poisoned(float amount) {
 		while (health > 0f) {
 			yield return new WaitForSeconds (1f);
 			ParticleManager.instance.EmitAt("Poison", transform.position, 7);
 			TakeDamage (amount);
-
-			print ("AM " + amount);
 		}
+		poisoned = false;
 	}
 }

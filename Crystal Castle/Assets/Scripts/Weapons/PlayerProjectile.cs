@@ -49,8 +49,10 @@ public class PlayerProjectile : Projectile {
         //Reset
         bounces = 0;
 
-		if (poisonDamage != 0f && collider.gameObject.tag == "Enemy")
-			StartCoroutine (collider.gameObject.GetComponent<EnemyHealth>().Poisoned(poisonDamage));
+		if (poisonDamage != 0f && collider.gameObject.tag == "Enemy") {
+			collider.GetComponent<EnemyHealth> ().SetPoison (poisonDamage);
+		}
+			//StartCoroutine (collider.gameObject.GetComponent<EnemyHealth>().Poisoned(poisonDamage));
 
         gameObject.SetActive(false);
         ParticleManager.instance.EmitAt("BulletHit", transform.position, 5);
