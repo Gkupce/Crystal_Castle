@@ -34,7 +34,7 @@ public class Health : MonoBehaviour {
 
 	IEnumerator Poisoned(float amount) {
 		while (health > 0f) {
-			yield return new WaitForSeconds (1f);
+			yield return new WaitForSeconds (0.7f);
 			ParticleManager.instance.EmitAt("Poison", transform.position, 7);
 			TakeDamage (amount);
 		}
