@@ -5,19 +5,19 @@ using UnityEngine;
 
 public class PlayerMover : MonoBehaviour {
 	public float maxSpeed = 1.0f;
-    Rigidbody2D rBody;
+	Rigidbody2D rBody;
 	
 	// Use this for initialization
 	void Start () {
-        rBody = GetComponent<Rigidbody2D>();
+		rBody = GetComponent<Rigidbody2D>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if(!GameController.Instance.allowControll)
-        {
-            return;
-        }
+		if(!GameController.Instance.allowControll)
+		{
+			return;
+		}
 		Vector3 direction = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
 		if(direction.magnitude > 1)
 		{
@@ -25,13 +25,13 @@ public class PlayerMover : MonoBehaviour {
 		}
 		if(direction.magnitude > 0.01f)
 		{
-            rBody.velocity = direction * maxSpeed;
-        }
-        else
-        {
-            rBody.velocity = Vector3.zero;
-        }
-        checkAnimation(direction);
+			rBody.velocity = direction * maxSpeed;
+		}
+		else
+		{
+			rBody.velocity = Vector3.zero;
+		}
+		checkAnimation(direction);
 	}
 	
 	void checkAnimation(Vector3 direction)
