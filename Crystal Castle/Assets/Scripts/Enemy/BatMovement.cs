@@ -35,7 +35,7 @@ public class BatMovement : MonoBehaviour {
     {
         if(collision.tag == "Player")
         {
-            collision.GetComponent<Health>().TakeDamage(10f);
+			collision.GetComponentInParent<Health>().TakeDamage(10f);
         }
     }
 }

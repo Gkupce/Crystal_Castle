@@ -1,23 +1,30 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMover : MonoBehaviour {
 	public float maxSpeed = 1.0f;
-    Rigidbody2D rBody;
-	
-	// Use this for initialization
-	void Start () {
-        rBody = GetComponent<Rigidbody2D>();
+	private Rigidbody2D rBody;
+	private Animator anim;
+
+	public ParticleSystem sweatParticles;
+	public float feintCooldown;
+	private bool feintAvailable = true;
+
+
+
+	private void Start () {
+		rBody = GetComponent<Rigidbody2D>();
+		anim = GetComponent<Animator> ();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-        if(!GameController.Instance.allowControll)
-        {
-            return;
-        }
+
+
+
+	private void Update () {
+		if(!GameController.Instance.allowControll)
+		{
+			return;
+		}
 		Vector3 direction = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
 		if(direction.magnitude > 1)
 		{
@@ -25,17 +32,20 @@ public class PlayerMover : MonoBehaviour {
 		}
 		if(direction.magnitude > 0.01f)
 		{
-            rBody.velocity = direction * maxSpeed;
-        }
-        else
-        {
-            rBody.velocity = Vector3.zero;
-        }
-        checkAnimation(direction);
+			rBody.velocity = direction * maxSpeed;
+		}
+		else
+		{
+			rBody.velocity = Vector3.zero;
+		}
+		checkAnimation(direction);
 	}
-	
-	void checkAnimation(Vector3 direction)
+
+
+
+	private void checkAnimation(Vector3 direction)
 	{
+		
 		if (direction.magnitude > 0.01f)
 		{
 			gameObject.GetComponent<Animator>().SetBool("Walking", true);
@@ -43,31 +53,51 @@ public class PlayerMover : MonoBehaviour {
 			{//Horizontal
 				if (direction.x > 0)
 				{//Right
-					gameObject.GetComponent<Animator>().SetInteger("Dir", (int)AnimDir.Right);
+					anim.SetInteger("Dir", (int)AnimDir.Right);
 				}
 				else
 				{//Left
-					gameObject.GetComponent<Animator>().SetInteger("Dir", (int)AnimDir.Left);
+					anim.SetInteger("Dir", (int)AnimDir.Left);
 				}
 			}
 			else
 			{//Vertical
 				if (direction.y > 0)
 				{//Up
-					gameObject.GetComponent<Animator>().SetInteger("Dir", (int)AnimDir.Up);
+					anim.SetInteger("Dir", (int)AnimDir.Up);
 				}
 				else
 				{//Down
-					gameObject.GetComponent<Animator>().SetInteger("Dir", (int)AnimDir.Down);
+					anim.SetInteger("Dir", (int)AnimDir.Down);
 				}
 			}
 		}
 		else
 		{
-			gameObject.GetComponent<Animator>().SetBool("Walking", false);
+			anim.SetBool("Walking", false);
+		}
+
+		if (feintAvailable && Input.GetButtonDown("Feint"))
+		{
+			anim.SetTrigger("Feint");
+			feintAvailable = false;
 		}
 	}
 
+
+	IEnumerator ActivateFeint(int i){
+		yield return new WaitForSeconds(feintCooldown);
+		feintAvailable = true;
+		sweatParticles.Stop ();
+	}
+
+
+	private void StartSweating(){
+		sweatParticles.Play ();
+		StartCoroutine (ActivateFeint(0));
+	}
+
+	
 	enum AnimDir
 	{
 		Down = 0,
