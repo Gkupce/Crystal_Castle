@@ -22,6 +22,6 @@ public class GemUIManager : MonoBehaviour {
         UICrystalImages[index].enabled = type != GemManager.GemType.None;
 
         UICrystalImages[index].sprite = crystalSprites[(int)type];
-        UICrystalAmountLabels[index].text = amount.ToString();
+        UICrystalAmountLabels[index].text = (amount == 0 ? "" : amount.ToString());
     }
 }

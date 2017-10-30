@@ -7,11 +7,13 @@ public class PlayerProjectile : Projectile {
     public float damage = 1;
     public int bounces = 0;
 
+    public bool destroyOnHit = true;
+
     private void OnTriggerEnter2D (Collider2D collision) {
         if (collision.tag == "Enemy")
         {
             collision.GetComponent<EnemyHealth>().TakeDamage(damage);
-            OnHit();
+            OnHit(collision.bounds.ClosestPoint(transform.position));
         }
         else if (bounces > 0)
         {
@@ -25,7 +27,7 @@ public class PlayerProjectile : Projectile {
         }
         else
         {
-            OnHit();
+            OnHit(collision.bounds.ClosestPoint(transform.position));
         }
     }
 
@@ -39,14 +41,17 @@ public class PlayerProjectile : Projectile {
         }
         else
         {
-            OnHit();
+            OnHit(collision.contacts[0].point);
         }
     }
 
-    void OnHit () {
+    void OnHit (Vector3 pos) {
         //Reset
         bounces = 0;
-        gameObject.SetActive(false);
-        ParticleManager.instance.EmitAt("BulletHit", transform.position, 5);
+        if (destroyOnHit)
+        {
+            gameObject.SetActive(false);
+        }
+        ParticleManager.instance.EmitAt("BulletHit", pos, 5);
     }
 }
