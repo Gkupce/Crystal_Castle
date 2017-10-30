@@ -8,11 +8,11 @@ public class Weapon : MonoBehaviour {
 	void Update () {
 		if(GameController.Instance.allowControll)
 		{
-			if (Input.GetButtonDown("Fire1"))
+			if (Input.GetButtonDown("Fire"))
 			{
 				OnFireDown();
 			}
-			if (Input.GetButtonUp("Fire1"))
+			if (Input.GetButtonUp("Fire"))
 			{
 				OnFireUp();
 			}
