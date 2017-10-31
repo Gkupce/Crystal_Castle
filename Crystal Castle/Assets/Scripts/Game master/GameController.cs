@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
     public static GameController Instance;
+    public LevelManager levelManager;
+    public GameObject player1;
 
     public bool allowControll {
 		get {
@@ -26,13 +28,24 @@ public class GameController : MonoBehaviour {
             if (Instance != null)
             {
                 Debug.LogError("The game master is present twice in the scene.");
+                return;
             }
         #endif
         Instance = this;
         anim = GetComponent<Animator>();
     }
 
-	private void Update()
+    private void Start()
+    {
+        if(levelManager != null)
+        {
+            levelManager.LoadNextLevel();
+            player1.transform.position = levelManager.loadedLevel.getPlayer1InitialPos();
+        }
+        anim.SetTrigger("FadeOut");
+    }
+
+    private void Update()
 	{
 		if (Input.GetButtonUp("Pause"))
 		{
