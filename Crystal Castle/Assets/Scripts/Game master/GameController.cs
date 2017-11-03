@@ -94,6 +94,6 @@ public class GameController : MonoBehaviour {
         yield return new WaitForSeconds(1f);
         anim.SetTrigger("FadeOut");
         yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene(0);
+		SceneManager.LoadScene((int)Enums.Scenes.MENU);
     }
 }

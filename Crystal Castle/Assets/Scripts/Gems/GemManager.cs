@@ -9,7 +9,8 @@ public class GemManager : MonoBehaviour {
         None,
         Speed,
         Homing,
-		Bouncing
+		Bouncing,
+		Poison
     }
 
     GemType[] types = new GemType[2] { GemType.None, GemType.None };
@@ -86,7 +87,14 @@ public class GemManager : MonoBehaviour {
         {
             return;
         }
+
+        if(types[i] == GemType.Speed)
+        {
+            transform.GetComponent<AutomaticProjectileWeapon>().RemoveCooldown();
+        }
+
         GameObject explosion = null;
+
         switch (types[i])
         {
             default: //en caso de que este tipo de gema no tenga una bomba especial o no este implementada, uso la default
@@ -95,9 +103,12 @@ public class GemManager : MonoBehaviour {
                 explosion.GetComponent<PlayerProjectile>().damage = amounts[i] * 2;
                 break;
         }
+
         types[i] = GemType.None;
         amounts[i] = 0;
+
         GemUIManager.instance.AddGem(i,GemType.None,0);
+
         if (explosion != null)
         {
             Destroy(explosion,0.5f);
