@@ -97,6 +97,11 @@ public class GemManager : MonoBehaviour {
 
         switch (types[i])
         {
+            case GemType.Bouncing:
+            case GemType.Homing:
+                explosion = Instantiate(bombs[1], transform.position, Quaternion.identity);
+                explosion.GetComponent<SpreadBomb>().Explode(amounts[i], types[i]);
+                break;
             default: //en caso de que este tipo de gema no tenga una bomba especial o no este implementada, uso la default
                 explosion = Instantiate(bombs[0], transform.position, Quaternion.identity);
                 explosion.transform.localScale = Vector3.one * Mathf.Clamp(amounts[i] * 0.5f,1f,4f);

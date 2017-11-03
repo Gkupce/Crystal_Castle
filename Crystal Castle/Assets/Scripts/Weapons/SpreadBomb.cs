@@ -19,7 +19,7 @@ public class SpreadBomb : MonoBehaviour {
             switch (gemType) {
                 case GemManager.GemType.Homing:
                     Homing h = b.GetComponent<Homing>();
-                    h.rotSpeed = 3f;
+                    h.rotSpeed = 7f;
                     h.maxAngleDif = 90f;
                     h.enabled = true;
                     break;
