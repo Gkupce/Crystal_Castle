@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour {
 
-    Rigidbody2D rBody;
+    protected Rigidbody2D rBody;
     public float speed = 10f;
 
     float deleteTimer = 5f;
