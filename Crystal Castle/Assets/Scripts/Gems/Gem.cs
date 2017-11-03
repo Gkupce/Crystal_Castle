@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
 public class Gem : MonoBehaviour {
+	
     public GemManager.GemType gemType;
 
     public void GrabAnim()
