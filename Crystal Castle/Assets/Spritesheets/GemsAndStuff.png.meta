@@ -1,11 +1,11 @@
 fileFormatVersion: 2
 guid: 014f82726e7407445b6f5c81c9492e99
-timeCreated: 1506710477
+timeCreated: 1507937835
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: GemRed
-    21300002: GemPurple
+    21300002: GemViolet
     21300004: GemGreen
     21300006: GemYellow
     21300008: GemBlue
@@ -112,13 +112,13 @@ TextureImporter:
         width: 21
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: GemPurple
+      name: GemViolet
       rect:
         serializedVersion: 2
         x: 99
@@ -126,7 +126,7 @@ TextureImporter:
         width: 21
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -140,7 +140,7 @@ TextureImporter:
         width: 21
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -154,7 +154,7 @@ TextureImporter:
         width: 21
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -168,7 +168,7 @@ TextureImporter:
         width: 21
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

@@ -8,12 +8,29 @@ public class GemManager : MonoBehaviour {
     {
         None,
         Speed,
-        Homing
+        Homing,
+		Bouncing,
+		Poison
     }
 
     GemType[] types = new GemType[2] { GemType.None, GemType.None };
     int[] amounts = new int[2] { 0, 0 };
 
+    public GemType[] Types
+    {
+        get
+        {
+            return types;
+        }
+    }
+
+    public int[] Amounts
+    {
+        get
+        {
+            return amounts;
+        }
+    }
 
     public bool PickUpGem(GemType gemType)
     {
@@ -46,11 +63,7 @@ public class GemManager : MonoBehaviour {
         switch (gemType)
         {
             case GemType.Speed:
-                transform.Find("Normal").GetComponent<AutomaticProjectileWeapon>().ReduseCooldown(0.05f);
-                break;
-            case GemType.Homing:
-				transform.Find("Homing").GetComponent<AutomaticProjectileWeapon>().canAttack = true;
-                transform.Find("Homing").GetComponent<AutomaticProjectileWeapon>().ReduseCooldown(0.1f);
+                transform.GetComponent<AutomaticProjectileWeapon>().ReduceCooldown(0.05f);
                 break;
         }
     }
