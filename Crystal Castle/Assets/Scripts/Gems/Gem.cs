@@ -8,6 +8,6 @@ public class Gem : MonoBehaviour {
         GetComponent<Collider2D>().enabled = false;
         transform.GetChild(0).GetComponent<Animator>().Play("GemGrab");
         ParticleManager.instance.EmitAt("GemGrab", transform.position, 7);
-        Destroy(gameObject,0.2f);
+        Destroy(gameObject, 0.2f);
     }
 }
