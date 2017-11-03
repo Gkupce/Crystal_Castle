@@ -9,20 +9,14 @@ public class Projectile : MonoBehaviour {
 
     float deleteTimer = 5f;
     
-	void Start () {
+	void Awake () {
         rBody = GetComponent<Rigidbody2D>();
-	}
-	
-	void FixedUpdate () {
-		if(!GameController.Instance.pause)
-		{
-			rBody.velocity = transform.up * speed;
-		}
 	}
 
     private void OnEnable()
     {
         deleteTimer = 5f;
+        rBody.velocity = transform.up * speed;
     }
 
     private void Update()
