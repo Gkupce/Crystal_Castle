@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour {
     public static GameController Instance;
 
-    public bool allowControll {
+    public bool allowControl {
 		get {
 			return !(inCinematic || pause || playerIsDead);
 		}
