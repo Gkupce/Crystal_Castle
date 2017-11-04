@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class SpeedBomb : PlayerProjectile {
+public class SpeedBombProjectile : PlayerProjectile {
 
 	float unit = 0.0f;
 	float freq = 2.0f;
@@ -21,7 +21,7 @@ public class SpeedBomb : PlayerProjectile {
 	void Update () {
 		transform.Rotate(Vector3.forward, freq);
 		//transform.eulerAngles = new Vector2 (unit*Mathf.Cos(Time.time*freq), unit*Mathf.Sin(Time.time*freq));
-		transform.Translate (Vector3.up * 2 * Time.deltaTime);
+		transform.Translate (Vector3.up * 1.3f * Time.deltaTime);
 		//transform.position = (Vector2)transform.position + new Vector2 (unit*Mathf.Cos(Time.time*freq), unit*Mathf.Sin(Time.time*freq));
 		unit += Time.deltaTime;
 	}
