@@ -106,6 +106,11 @@ public class GemManager : MonoBehaviour {
 				bombs = Instantiate(bombPrefs[(int)GemType.Homing], transform.position, Quaternion.identity);
                 bombs.GetComponent<SpreadBomb>().Explode(amounts[i], types[i]);
                 break;
+            case GemType.Poison:
+                bombs = Instantiate(bombPrefs[(int)GemType.Poison], transform.position, Quaternion.identity);
+                bombs.transform.localScale = Vector3.one * Mathf.Clamp(amounts[i] * 0.5f, 1f, 4f);
+                bombs.GetComponent<PlayerProjectile>().poisonDamage = amounts[i];
+                break;
             default: //en caso de que este tipo de gema no tenga una bomba especial o no este implementada, uso la default
 				bombs = Instantiate(bombPrefs[(int)GemType.None], transform.position, Quaternion.identity);
                 bombs.transform.localScale = Vector3.one * Mathf.Clamp(amounts[i] * 0.5f,1f,4f);

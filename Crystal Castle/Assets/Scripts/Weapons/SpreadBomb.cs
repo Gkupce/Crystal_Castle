@@ -7,6 +7,8 @@ public class SpreadBomb : MonoBehaviour {
     public GameObject projectile;
     public string projectileName;
 
+    public Sprite[] sprites;
+
     public void Explode(int gems,GemManager.GemType gemType)
     {
         int projectiles = gems * 2;
@@ -22,9 +24,12 @@ public class SpreadBomb : MonoBehaviour {
                     h.rotSpeed = 7f;
                     h.maxAngleDif = 90f;
                     h.enabled = true;
+                    b.GetComponentInChildren<SpriteRenderer>().sprite = sprites[0];
                     break;
                 case GemManager.GemType.Bouncing:
                     b.GetComponent<PlayerProjectile>().bounces = gems;
+                    b.GetComponentInChildren<SpriteRenderer>().sprite = sprites[1];
+
                     break;
             }
         }

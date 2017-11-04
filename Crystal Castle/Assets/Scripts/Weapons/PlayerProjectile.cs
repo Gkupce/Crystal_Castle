@@ -53,10 +53,10 @@ public class PlayerProjectile : Projectile {
         }
         //Reset
         bounces = 0;
-        poisonDamage = 0;
 
         if (destroyOnHit)
         {
+            poisonDamage = 0;
             gameObject.SetActive(false);
         }
         ParticleManager.instance.EmitAt("BulletHit", collider.bounds.ClosestPoint(transform.position), 5);
