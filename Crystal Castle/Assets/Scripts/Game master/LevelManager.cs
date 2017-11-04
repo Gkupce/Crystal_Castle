@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour {
 	public Level[] levels;
-	public Level loadedLevel;
+
+	[HideInInspector]
+	public Level loadedLevel = null;
 
 	int currentLevel = 0;
 
@@ -12,9 +14,16 @@ public class LevelManager : MonoBehaviour {
 	{
 		if(loadedLevel != null)
 		{
-			GameObject.Destroy(loadedLevel);
+			GameObject.Destroy(loadedLevel.gameObject);
 		}
-		loadedLevel = (Level)GameObject.Instantiate(levels[currentLevel]);
-		currentLevel++;
+		if(currentLevel < levels.Length)
+		{
+			loadedLevel = (Level)GameObject.Instantiate(levels[currentLevel]);
+			currentLevel++;
+		}
+		else
+		{
+			loadedLevel = null;
+		}
 	}
 }

@@ -8,7 +8,7 @@ public class BatMovement : MonoBehaviour {
     Rigidbody2D rBody;
     public float attackRange = 5f;
     public float movementSpeed = 3f;
-    public float dammage = 1f;
+    public float damage = 1f;
 
 	void Start () {
         playerTransform = GameObject.FindWithTag("Player").transform;
@@ -35,7 +35,11 @@ public class BatMovement : MonoBehaviour {
     {
         if(collision.tag == "Player")
         {
-            collision.GetComponent<Health>().TakeDamage(10f);
+            Health playerHealth = collision.GetComponentInParent<Health>();
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamage(damage);
+            }
         }
     }
 

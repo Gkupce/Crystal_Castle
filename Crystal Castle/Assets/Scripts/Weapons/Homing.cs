@@ -5,53 +5,64 @@ public class Homing : MonoBehaviour {
 
     Transform target;
     public LayerMask targetLayer;
-    float rotSpeed = 0f;
-    
+    public float rotSpeed = 0f;
+    public float maxAngleDif = 35f;
+    float lastDist;
 
     private void OnEnable()
     {
         target = null;
-        rotSpeed = 0;
         StartCoroutine(GetTarget());
+        lastDist = float.MaxValue;
     }
 
     private void OnDisable()
     {
         StopAllCoroutines();
+        enabled = false;
     }
 
     void Update () {
         if (target)
         {
-            rotSpeed += 10 * Time.deltaTime;
             transform.rotation = Quaternion.Lerp(transform.rotation,GetRot(),rotSpeed * Time.deltaTime);
+            float d = Vector3.Distance(transform.position,target.position);
+            if (d > lastDist)
+            {
+                target = null;
+                StopAllCoroutines();
+                StartCoroutine(GetTarget());
+            }
+            else
+            {
+                lastDist = d;
+            }
         }
 	}
 
     IEnumerator GetTarget()
     {
-        rotSpeed = 0f;
+        float minAngleDif = maxAngleDif;
         while(target == null)
         {
-            foreach(Collider2D c in Physics2D.OverlapCircleAll(transform.position, 10f, targetLayer))
+            foreach(Collider2D c in Physics2D.OverlapCircleAll(transform.position, 8f, targetLayer))
             {
                 if(c == null)
                 {
                     continue;
                 }
-                if (target == null)
-                {
-                    target = c.transform;
-                }
                 else
                 {
-                    if(Vector3.Distance(target.position,transform.position) > Vector3.Distance(c.transform.position, transform.position))
+                    float ang = Vector3.Angle(c.transform.position - transform.position, transform.up);
+                    if (ang < minAngleDif)
                     {
+                        minAngleDif = ang;
                         target = c.transform;
+                        lastDist = Vector3.Distance(transform.position,target.position);
                     }
                 }
             }
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.5f);
         }
     }
 

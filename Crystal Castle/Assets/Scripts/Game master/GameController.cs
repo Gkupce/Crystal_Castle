@@ -38,14 +38,16 @@ public class GameController : MonoBehaviour {
     private void Start()
     {
         if(levelManager != null)
-        {
-            levelManager.LoadNextLevel();
-            player1.transform.position = levelManager.loadedLevel.getPlayer1InitialPos();
-        }
-        anim.SetTrigger("FadeOut");
+		{
+			PrepareNextLevel();
+		}
+		else
+		{
+			anim.SetTrigger("FadeOut");
+		}
     }
-
-    private void Update()
+	
+	private void Update()
 	{
 		if (Input.GetButtonUp("Pause"))
 		{
@@ -66,11 +68,31 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
+	public void LoadNextLevel()
+	{
+		inCinematic = true;
+		currentCinematic = cinematics.NextLevel;
+		anim.SetTrigger("FadeOut");
+	}
+
+	private void PrepareNextLevel()
+	{
+		levelManager.LoadNextLevel();
+		player1.transform.position = levelManager.loadedLevel.getPlayer1InitialPos();
+		StartCinematic(cinematics.FadeIn);
+	}
+
 	public void StartCinematic(cinematics cinematicToStart)
 	{
 		inCinematic = true;
 		currentCinematic = cinematicToStart;
-		//TODO actually start cinematic
+		if(currentCinematic == cinematics.FadeOut 
+			|| currentCinematic == cinematics.FadeIn
+			|| currentCinematic == cinematics.NextLevel
+		) {
+			anim.SetTrigger("FadeOut");
+		}
+
 	}
 
 	public void AfterCinematic()
@@ -78,6 +100,10 @@ public class GameController : MonoBehaviour {
 		if(currentCinematic == cinematics.FadeOut)
 		{
 			StartCinematic(cinematics.FadeIn);
+		}
+		else if(currentCinematic == cinematics.NextLevel)
+		{
+			PrepareNextLevel();
 		}
 		else
 		{
@@ -92,7 +118,7 @@ public class GameController : MonoBehaviour {
 		FadeIn,
 		FadeOut,
 		End,
-		GoingToStairs,
+		NextLevel,
 		None
 	}
 
@@ -107,6 +133,6 @@ public class GameController : MonoBehaviour {
         yield return new WaitForSeconds(1f);
         anim.SetTrigger("FadeOut");
         yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene(0);
+		SceneManager.LoadScene((int)Enums.Scenes.MENU);
     }
 }
