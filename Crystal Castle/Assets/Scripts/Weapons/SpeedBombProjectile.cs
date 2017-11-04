@@ -20,9 +20,7 @@ public class SpeedBombProjectile : PlayerProjectile {
 
 	void Update () {
 		transform.Rotate(Vector3.forward, freq);
-		//transform.eulerAngles = new Vector2 (unit*Mathf.Cos(Time.time*freq), unit*Mathf.Sin(Time.time*freq));
 		transform.Translate (Vector3.up * 1.3f * Time.deltaTime);
-		//transform.position = (Vector2)transform.position + new Vector2 (unit*Mathf.Cos(Time.time*freq), unit*Mathf.Sin(Time.time*freq));
 		unit += Time.deltaTime;
 	}
 }
