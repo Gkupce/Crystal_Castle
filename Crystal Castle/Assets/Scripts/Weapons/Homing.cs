@@ -6,6 +6,7 @@ public class Homing : MonoBehaviour {
     Transform target;
     public LayerMask targetLayer;
     public float rotSpeed = 0f;
+    public float maxAngleDif = 35f;
     float lastDist;
 
     private void OnEnable()
@@ -41,7 +42,7 @@ public class Homing : MonoBehaviour {
 
     IEnumerator GetTarget()
     {
-        float minAngleDif = 35f;
+        float minAngleDif = maxAngleDif;
         while(target == null)
         {
             foreach(Collider2D c in Physics2D.OverlapCircleAll(transform.position, 8f, targetLayer))

@@ -44,19 +44,8 @@ public class AutomaticProjectileWeapon : ProjectileWeapon
             actualCooldown = Mathf.Min(actualCooldown, fireCooldown - coolDownReduction);
         }
     }
-    /*
+    
 	public void RemoveCooldown () {
 		coolDownReduction = 0.0f;
 	}
-
-	public void RemoveProperty (GemManager.GemType type) {
-		switch (type) {
-			case GemManager.GemType.Speed:
-				RemoveCooldown ();
-				break;
-			case GemManager.GemType.Bouncing:
-				RemoveBounces ();
-				break;
-		}
-	}*/
 }
