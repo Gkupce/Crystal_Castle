@@ -11,12 +11,15 @@ public class GemUIManager : MonoBehaviour {
     public Text[] UICrystalAmountLabels;
 	public Text[] UIButtonHints;
 
-    public static GemUIManager instance;
+    public static GemUIManager Instance;
 
 
     private void Awake()
     {
-        instance = this;
+		if (Instance != null && Instance != this)
+			Destroy (this);
+		else
+			Instance = this;
     }
 
 

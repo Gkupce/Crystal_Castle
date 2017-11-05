@@ -10,7 +10,8 @@ public class GemManager : MonoBehaviour {
         Speed = 1,
         Homing = 2,
 		Bouncing = 3,
-		Poison = 4
+		Poison = 4,
+		Count
     }
 
     GemType[] types = new GemType[2] { GemType.None, GemType.None };
@@ -51,7 +52,7 @@ public class GemManager : MonoBehaviour {
                     amounts[i] = 1;
                 }
                 GemEffect(gemType);
-                GemUIManager.instance.AddGem(i, gemType, amounts[i]);
+                GemUIManager.Instance.AddGem(i, gemType, amounts[i]);
                 return true;
             }
         }
@@ -121,7 +122,7 @@ public class GemManager : MonoBehaviour {
         types[i] = GemType.None;
         amounts[i] = 0;
 
-        GemUIManager.instance.AddGem(i,GemType.None,0);
+        GemUIManager.Instance.AddGem(i,GemType.None,0);
 
         if (bombs != null)
         {
