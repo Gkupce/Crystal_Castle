@@ -6,11 +6,12 @@ public class Health : MonoBehaviour {
 
     public float health = 5f;
 	private bool poisoned = false;
+	protected bool immortal = false;
 
 
     public void TakeDamage(float amount)
     {
-        if (health > 0)
+        if (health > 0 && !immortal)
         {
 			health = Mathf.Clamp(health - amount, 0, 100);
 			OnHit ();

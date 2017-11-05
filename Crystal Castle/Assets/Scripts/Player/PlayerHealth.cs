@@ -4,17 +4,25 @@ using UnityEngine;
 
 public class PlayerHealth : Health {
 
-	private UnityEngine.UI.Image life;
-	public string lifeUIName = string.Empty;
+	private HeartUIManager heart = null;
+	public string heartUIName = string.Empty;
 
 
 	private void Start () {
-		life = GameObject.Find (lifeUIName).GetComponent<UnityEngine.UI.Image> ();
+		heart = GameObject.Find (heartUIName).GetComponent<HeartUIManager> ();
 	}
 
 
 	protected override void OnHit () {
-		life.fillAmount = health / 100f;
+		StartCoroutine (Immortal ());
+		heart.UpdateHeart (health / 100f);
+	}
+
+
+	private IEnumerator Immortal () {
+		immortal = true;
+		yield return new WaitForSeconds (1f);
+		immortal = false;
 	}
 
 
