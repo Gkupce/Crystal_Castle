@@ -21,6 +21,7 @@ public class GameController : MonoBehaviour {
 	private cinematics currentCinematic = cinematics.FadeIn;
 
     Animator anim;
+    public GameObject endPopUp;
 
     private void Awake()
     {
@@ -137,5 +138,10 @@ public class GameController : MonoBehaviour {
         anim.SetTrigger("FadeOut");
         yield return new WaitForSeconds(1f);
 		SceneManager.LoadScene((int)Enums.Scenes.MENU);
+    }
+
+    public void ShowEndPopup()
+    {
+        endPopUp.SetActive(true);
     }
 }
