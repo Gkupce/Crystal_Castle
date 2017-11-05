@@ -75,7 +75,6 @@ public class StoryIntro : StoryPart {
     IEnumerator Finish() {
         yield return new WaitForSeconds(1f);
         fade.SetTrigger("FadeOut");
-        yield return new WaitForSeconds(1f);
         NextScene();
     }
 
