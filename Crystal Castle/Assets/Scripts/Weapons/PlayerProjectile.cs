@@ -4,10 +4,19 @@ using UnityEngine;
 
 public class PlayerProjectile : Projectile {
 
+	PlayerHealth health = null;
+
     public float damage = 1;
     public int bounces = 0;
 	public float poisonDamage = 0f;
+	public float vampireRecovery = 0f;
     public bool destroyOnHit = true;
+
+
+	protected override void OnAwake () {
+		health = GameObject.Find ("Player1").GetComponent<PlayerHealth> ();
+	}
+
 
 	private void OnTriggerEnter2D (Collider2D collider) {
         if (collider.tag == "Enemy")
@@ -32,6 +41,7 @@ public class PlayerProjectile : Projectile {
         }
     }
 
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (bounces > 0)
@@ -55,6 +65,8 @@ public class PlayerProjectile : Projectile {
         }
         //Reset
         bounces = 0;
+		if (vampireRecovery > 0)
+			health.TakeDamage (-vampireRecovery);
 
         if (destroyOnHit)
         {

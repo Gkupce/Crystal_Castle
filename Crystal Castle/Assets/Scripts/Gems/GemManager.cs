@@ -10,7 +10,9 @@ public class GemManager : MonoBehaviour {
         Speed = 1,
         Homing = 2,
 		Bouncing = 3,
-		Poison = 4
+		Poison = 4,
+		Vampire = 5,
+		Count
     }
 
     GemType[] types = new GemType[2] { GemType.None, GemType.None };
@@ -111,10 +113,15 @@ public class GemManager : MonoBehaviour {
                 bombs.transform.localScale = Vector3.one * Mathf.Clamp(amounts[i] * 0.5f, 1f, 4f);
                 bombs.GetComponent<PlayerProjectile>().poisonDamage = amounts[i];
                 break;
+			case GemType.Vampire:
+				bombs = Instantiate(bombPrefs[(int)GemType.Vampire], transform.position, Quaternion.identity);
+				bombs.transform.localScale = Vector3.one * Mathf.Clamp(amounts[i] * 0.5f,1f,4f);
+				bombs.GetComponent<PlayerProjectile>().vampireRecovery = amounts[i] * 5;
+				break;
             default: //en caso de que este tipo de gema no tenga una bomba especial o no este implementada, uso la default
 				bombs = Instantiate(bombPrefs[(int)GemType.None], transform.position, Quaternion.identity);
                 bombs.transform.localScale = Vector3.one * Mathf.Clamp(amounts[i] * 0.5f,1f,4f);
-                bombs.GetComponent<PlayerProjectile>().damage = amounts[i] * 2;
+                //bombs.GetComponent<PlayerProjectile>().damage = amounts[i] * 2;
                 break;
         }
 

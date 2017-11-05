@@ -9,9 +9,12 @@ public class Projectile : MonoBehaviour {
 
     float deleteTimer = 5f;
     
-	void Awake () {
+	private void Awake () {
         rBody = GetComponent<Rigidbody2D>();
+		OnAwake ();
 	}
+
+	protected virtual void OnAwake () {	}
 
     private void OnEnable()
     {

@@ -45,18 +45,23 @@ public class ProjectileWeapon : Weapon {
             {
                 case GemManager.GemType.Homing:
                     Homing h = bullet.GetComponent<Homing>();
-					h.rotSpeed = gemManager.Amounts[i] * HOMING_ROT;
+					h.rotSpeed = gemManager.Amounts [i] * HOMING_ROT;
                     h.enabled = true;
                     break;
                 case GemManager.GemType.Bouncing:
-                    PlayerProjectile p1 = bullet.GetComponent<PlayerProjectile>();
-                    p1.bounces = gemManager.Amounts[i];
+                    PlayerProjectile p1 = bullet.GetComponent<PlayerProjectile> ();
+                    p1.bounces = gemManager.Amounts [i] / 4 + 1;
                     p1.enabled = true;
                     break;
-			case GemManager.GemType.Poison:
-				PlayerProjectile p2 = bullet.GetComponent<PlayerProjectile> ();
-				p2.poisonDamage = gemManager.Amounts [i] * POISON_DAMAGE;
+				case GemManager.GemType.Poison:
+					PlayerProjectile p2 = bullet.GetComponent<PlayerProjectile> ();
+					p2.poisonDamage = gemManager.Amounts [i] * POISON_DAMAGE;
 					p2.enabled = true;
+					break;
+				case GemManager.GemType.Vampire:
+					PlayerProjectile p3 = bullet.GetComponent<PlayerProjectile> ();
+					p3.vampireRecovery = gemManager.Amounts[i];
+					p3.enabled = true;
 					break;
             }
         }
