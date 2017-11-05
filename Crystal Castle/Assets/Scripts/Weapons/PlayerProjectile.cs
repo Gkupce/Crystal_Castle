@@ -71,8 +71,13 @@ public class PlayerProjectile : Projectile {
         if (destroyOnHit)
         {
             poisonDamage = 0;
-            gameObject.SetActive(false);
+			OnBecameInvisible ();
         }
         ParticleManager.Instance.EmitAt("BulletHit", collider.bounds.ClosestPoint(transform.position), 5);
     }
+
+
+	void OnBecameInvisible () {
+		gameObject.SetActive (false);
+	}
 }

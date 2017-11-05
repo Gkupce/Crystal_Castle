@@ -62,7 +62,7 @@ public class EnemyWeapon : MonoBehaviour {
 	private void ShootAllAround (int i) {
 		while (i >= 0)
 		{
-			GameObject b = GameObjectPools.instance.GetPooledObject(projectileName);
+			GameObject b = GameObjectPools.Instance.GetPooledObject(projectileName);
 			b.transform.position = transform.position;
 			b.transform.rotation = Quaternion.Euler(0, 0, rot_z + angleBetweenProjectiles * i);
 			b.SetActive(true);
@@ -79,7 +79,7 @@ public class EnemyWeapon : MonoBehaviour {
 
 		while (i >= 0)
 		{
-			GameObject b = GameObjectPools.instance.GetPooledObject(projectileName);
+			GameObject b = GameObjectPools.Instance.GetPooledObject(projectileName);
 			b.transform.position = transform.position;
 			b.transform.rotation = Quaternion.Euler(0, 0, rot_z + angleBetweenProjectiles * pair * k);
 			k *= -1;

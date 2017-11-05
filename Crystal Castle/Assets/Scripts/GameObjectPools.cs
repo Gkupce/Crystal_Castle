@@ -9,11 +9,11 @@ public class GameObjectPools : MonoBehaviour {
     Dictionary<string, GameObject> objectDic = new Dictionary<string, GameObject>();
     Dictionary<string, List<GameObject>> pools = new Dictionary<string, List<GameObject>>();
 
-    public static GameObjectPools instance;
+    public static GameObjectPools Instance;
     
     private void Start()
     {
-        instance = this;
+        Instance = this;
         foreach(GameObject g in objectsToPool)
         {
             objectDic.Add(g.name.ToLower(),g);

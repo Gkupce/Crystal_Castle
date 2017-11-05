@@ -21,7 +21,7 @@ public class ProjectileWeapon : Weapon {
 
     protected void Shoot()
     {
-        GameObject bullet = GameObjectPools.instance.GetPooledObject(projectileName);
+        GameObject bullet = GameObjectPools.Instance.GetPooledObject(projectileName);
 
         bullet.transform.position = transform.position;
 
