@@ -7,7 +7,7 @@ public class PlayerProjectile : Projectile {
     public float damage = 1;
     public int bounces = 0;
 	public float poisonDamage = 0f;
-
+    public bool destroyOnHit = true;
 
 	private void OnTriggerEnter2D (Collider2D collider) {
         if (collider.tag == "Enemy")
@@ -47,16 +47,20 @@ public class PlayerProjectile : Projectile {
         }
     }
 
-	void OnHit (Collider2D collider) {
+	void OnHit (Collider2D collider)
+    {
+        if (poisonDamage != 0f && collider.gameObject.tag == "Enemy")
+        {
+            collider.GetComponent<EnemyHealth>().SetPoison(poisonDamage);
+        }
         //Reset
         bounces = 0;
 
-		if (poisonDamage != 0f && collider.gameObject.tag == "Enemy") {
-			collider.GetComponent<EnemyHealth> ().SetPoison (poisonDamage);
-		}
-			//StartCoroutine (collider.gameObject.GetComponent<EnemyHealth>().Poisoned(poisonDamage));
-
-        gameObject.SetActive(false);
-        ParticleManager.instance.EmitAt("BulletHit", transform.position, 5);
+        if (destroyOnHit)
+        {
+            poisonDamage = 0;
+            gameObject.SetActive(false);
+        }
+        ParticleManager.instance.EmitAt("BulletHit", collider.bounds.ClosestPoint(transform.position), 5);
     }
 }

@@ -6,15 +6,17 @@ public class GemManager : MonoBehaviour {
 
     public enum GemType
     {
-        None,
-        Speed,
-        Homing,
-		Bouncing,
-		Poison
+        None = 0,
+        Speed = 1,
+        Homing = 2,
+		Bouncing = 3,
+		Poison = 4
     }
 
     GemType[] types = new GemType[2] { GemType.None, GemType.None };
     int[] amounts = new int[2] { 0, 0 };
+
+    public GameObject[] bombPrefs;
 
     public GemType[] Types
     {
@@ -78,4 +80,57 @@ public class GemManager : MonoBehaviour {
             }
         }
     }
+
+    public void DropGem(int i)
+    {
+        if (amounts[i] < 1)
+        {
+            return;
+        }
+
+        if(types[i] == GemType.Speed)
+        {
+            transform.GetComponent<AutomaticProjectileWeapon>().RemoveCooldown();
+        }
+
+		GameObject bombs = null;
+
+        switch (types[i])
+        {
+			case GemType.Speed:
+				bombs = Instantiate(bombPrefs[(int)GemType.Speed], transform.position, Quaternion.identity);
+				bombs.GetComponent<SpeedBomb>().Explode(amounts[i]);
+				break;
+            case GemType.Bouncing:
+            case GemType.Homing:
+				bombs = Instantiate(bombPrefs[(int)GemType.Homing], transform.position, Quaternion.identity);
+                bombs.GetComponent<SpreadBomb>().Explode(amounts[i], types[i]);
+                break;
+            case GemType.Poison:
+                bombs = Instantiate(bombPrefs[(int)GemType.Poison], transform.position, Quaternion.identity);
+                bombs.transform.localScale = Vector3.one * Mathf.Clamp(amounts[i] * 0.5f, 1f, 4f);
+                bombs.GetComponent<PlayerProjectile>().poisonDamage = amounts[i];
+                break;
+            default: //en caso de que este tipo de gema no tenga una bomba especial o no este implementada, uso la default
+				bombs = Instantiate(bombPrefs[(int)GemType.None], transform.position, Quaternion.identity);
+                bombs.transform.localScale = Vector3.one * Mathf.Clamp(amounts[i] * 0.5f,1f,4f);
+                bombs.GetComponent<PlayerProjectile>().damage = amounts[i] * 2;
+                break;
+        }
+
+        types[i] = GemType.None;
+        amounts[i] = 0;
+
+        GemUIManager.instance.AddGem(i,GemType.None,0);
+
+        if (bombs != null)
+        {
+            Destroy(bombs, 0.5f);
+        }
+    }
+
+
+	private int BombsQuantity (int i) {
+		return amounts [i] / 4 + 1;
+	}
 }

@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
     public static GameController Instance;
+    public LevelManager levelManager;
+    public GameObject player1;
 
     public bool allowControl {
 		get {
@@ -26,12 +28,25 @@ public class GameController : MonoBehaviour {
             if (Instance != null)
             {
                 Debug.LogError("The game master is present twice in the scene.");
+                return;
             }
         #endif
         Instance = this;
         anim = GetComponent<Animator>();
     }
 
+    private void Start()
+    {
+        if(levelManager != null)
+		{
+			PrepareNextLevel();
+		}
+		else
+		{
+			anim.SetTrigger("FadeOut");
+		}
+    }
+	
 	private void Update()
 	{
 		if (Input.GetButtonUp("Pause"))
@@ -53,11 +68,31 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
+	public void LoadNextLevel()
+	{
+		inCinematic = true;
+		currentCinematic = cinematics.NextLevel;
+		anim.SetTrigger("FadeOut");
+	}
+
+	private void PrepareNextLevel()
+	{
+		levelManager.LoadNextLevel();
+		player1.transform.position = levelManager.loadedLevel.getPlayer1InitialPos();
+		StartCinematic(cinematics.FadeIn);
+	}
+
 	public void StartCinematic(cinematics cinematicToStart)
 	{
 		inCinematic = true;
 		currentCinematic = cinematicToStart;
-		//TODO actually start cinematic
+		if(currentCinematic == cinematics.FadeOut 
+			|| currentCinematic == cinematics.FadeIn
+			|| currentCinematic == cinematics.NextLevel
+		) {
+			anim.SetTrigger("FadeOut");
+		}
+
 	}
 
 	public void AfterCinematic()
@@ -65,6 +100,10 @@ public class GameController : MonoBehaviour {
 		if(currentCinematic == cinematics.FadeOut)
 		{
 			StartCinematic(cinematics.FadeIn);
+		}
+		else if(currentCinematic == cinematics.NextLevel)
+		{
+			PrepareNextLevel();
 		}
 		else
 		{
@@ -79,7 +118,7 @@ public class GameController : MonoBehaviour {
 		FadeIn,
 		FadeOut,
 		End,
-		GoingToStairs,
+		NextLevel,
 		None
 	}
 
