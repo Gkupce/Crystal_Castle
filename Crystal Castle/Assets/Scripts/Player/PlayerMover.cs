@@ -21,7 +21,7 @@ public class PlayerMover : MonoBehaviour {
 
 
 	private void Update () {
-		if(!GameController.Instance.allowControll)
+		if(!GameController.Instance.allowControl)
 		{
 			return;
 		}

@@ -13,7 +13,7 @@ public class FollowPlayer : MonoBehaviour {
     // Update is called once per frame
     private void LateUpdate()
     {
-        if (GameController.Instance.allowControll)
+        if (GameController.Instance.allowControl)
         {
             Vector3 playerPos = new Vector3(
                 player.transform.position.x,
