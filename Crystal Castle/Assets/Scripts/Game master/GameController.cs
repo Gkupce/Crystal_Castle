@@ -31,7 +31,10 @@ public class GameController : MonoBehaviour {
                 return;
             }
         #endif
-        Instance = this;
+		if (Instance != null && Instance != this)
+			Destroy (this);
+		else
+			Instance = this;
         anim = GetComponent<Animator>();
     }
 

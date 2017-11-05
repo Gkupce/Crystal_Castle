@@ -6,11 +6,14 @@ public class ParticleManager : MonoBehaviour {
 
     Dictionary<string, ParticleSystem> particles = new Dictionary<string, ParticleSystem>();
 
-    public static ParticleManager instance;
+    public static ParticleManager Instance;
 
     private void Awake()
     {
-        instance = this;
+		if (Instance != null && Instance != this)
+			Destroy (this);
+		else
+        	Instance = this;
     }
 
 	void Start () {
