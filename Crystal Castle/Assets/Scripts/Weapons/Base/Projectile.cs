@@ -4,25 +4,19 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour {
 
-    Rigidbody2D rBody;
+    protected Rigidbody2D rBody;
     public float speed = 10f;
 
     float deleteTimer = 5f;
     
-	void Start () {
+	void Awake () {
         rBody = GetComponent<Rigidbody2D>();
-	}
-	
-	void FixedUpdate () {
-		if(!GameController.Instance.pause)
-		{
-			rBody.velocity = transform.up * speed;
-		}
 	}
 
     private void OnEnable()
     {
         deleteTimer = 5f;
+        rBody.velocity = transform.up * speed;
     }
 
     private void Update()

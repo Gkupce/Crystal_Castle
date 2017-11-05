@@ -3,8 +3,7 @@ using System.Collections.Generic;
 
 public class ProjectileWeapon : Weapon {
 
-    public GameObject projectile;
-    List<GameObject> projectiles = new List<GameObject>();
+    public string projectileName;
 
     GemManager gemManager;
 
@@ -22,7 +21,7 @@ public class ProjectileWeapon : Weapon {
 
     protected void Shoot()
     {
-        GameObject bullet = GetProjectile();
+        GameObject bullet = GameObjectPools.instance.GetPooledObject(projectileName);
 
         bullet.transform.position = transform.position;
 
@@ -63,7 +62,7 @@ public class ProjectileWeapon : Weapon {
         }
     }
 
-
+    /*
     GameObject GetProjectile()
     {
         foreach(GameObject g in projectiles)
@@ -77,7 +76,7 @@ public class ProjectileWeapon : Weapon {
         projectiles.Add(go);
         return go;
     }
-
+    */
 
     public override void OnFireDown()
     {
