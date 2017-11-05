@@ -8,17 +8,21 @@ public class Health : MonoBehaviour {
 	private bool poisoned = false;
 
 
-    public void TakeDamage(float ammount)
+    public void TakeDamage(float amount)
     {
         if (health > 0)
         {
-            health -= ammount;
+			health = Mathf.Clamp(health - amount, 0, 100);
+			OnHit ();
             if (health <= 0)
             {
                 OnDeath();
             }
         }
     }
+
+
+	protected virtual void OnHit () {	}
 
 
     protected virtual void OnDeath() {	}
