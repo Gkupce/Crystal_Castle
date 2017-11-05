@@ -23,6 +23,7 @@ public class PlayerProjectile : Projectile {
             {
                 transform.up = Vector3.Reflect(transform.up,hit.normal);
                 Debug.DrawRay(hit.point, hit.normal, Color.red, 5f);
+                rBody.velocity = transform.up * speed;
             }
         }
         else
@@ -38,6 +39,7 @@ public class PlayerProjectile : Projectile {
             bounces--;
             transform.up = Vector3.Reflect(transform.up, collision.contacts[0].normal);
             Debug.DrawRay(collision.contacts[0].point, collision.contacts[0].normal, Color.red, 5f);
+            rBody.velocity = transform.up * speed;
         }
         else
         {

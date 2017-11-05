@@ -8,7 +8,7 @@ public class GameController : MonoBehaviour {
     public LevelManager levelManager;
     public GameObject player1;
 
-    public bool allowControll {
+    public bool allowControl {
 		get {
 			return !(inCinematic || pause || playerIsDead);
 		}
