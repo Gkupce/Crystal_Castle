@@ -16,6 +16,17 @@ public class GemManager : MonoBehaviour {
     }
 
     GemType[] types = new GemType[2] { GemType.None, GemType.None };
+	Color[] colors = {	
+						Color.white,
+						new Color (0.337f, 0.761f, 0.859f),			// Light-blue
+						new Color (0.834f, 0.855f, 0.310f),			// Yellow
+						new Color (0.310f, 0.855f, 0.580f),			// Green
+						new Color (0.859f, 0.337f, 0.596f),			// Violet
+						new Color (0.871f, 0.349f, 0.349f)			// Red
+	};
+
+	public Color[] currentColors = { Color.white, Color.white };
+
     int[] amounts = new int[2] { 0, 0 };
 
     public GameObject[] bombPrefs;
@@ -38,25 +49,39 @@ public class GemManager : MonoBehaviour {
 
     public bool PickUpGem(GemType gemType)
     {
-
+		int slot = -1;
         for (int i = 0; i < types.Length; i++)
         {
-            if (types[i] == gemType || types[i] == GemType.None)
-            {
-                if (types[i] == gemType)
-                {
-                    amounts[i]++;
-                }
-                if (types[i] == GemType.None)
-                {
-                    types[i] = gemType;
-                    amounts[i] = 1;
-                }
-                GemEffect(gemType);
-                GemUIManager.Instance.AddGem(i, gemType, amounts[i]);
-                return true;
-            }
+			if (types [i] == gemType)
+				slot = i;  
         }
+
+		if (slot == -1) {
+			for (int i = 0; i < types.Length; i++)
+			{
+				if (types [i] == GemType.None)
+					slot = i;  
+			}
+		}
+
+		if (slot != -1)
+		{
+			if (types[slot] == gemType)
+			{
+				amounts[slot]++;
+			}
+			if (types[slot] == GemType.None)
+			{
+				types[slot] = gemType;
+				amounts[slot] = 1;
+			}
+
+			GemEffect(gemType);
+			currentColors [slot] = colors[(int)gemType];
+
+			GemUIManager.Instance.AddGem(slot, gemType, amounts[slot]);
+			return true;
+		}
 
         return false;
     }
@@ -66,20 +91,22 @@ public class GemManager : MonoBehaviour {
     {
         switch (gemType)
         {
-            case GemType.Speed:
-                transform.GetComponent<AutomaticProjectileWeapon>().ReduceCooldown(0.05f);
-                break;
+			case GemType.Speed:
+				transform.GetComponent<AutomaticProjectileWeapon> ().ReduceCooldown (0.05f);
+				break;
         }
     }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Crystal")
         {
-            if (PickUpGem(collision.GetComponent<Gem>().gemType))
-            {
-                collision.GetComponent<Gem>().GrabAnim();
-            }
+			Gem gem = collision.GetComponent<Gem> ();
+			if (PickUpGem (gem.gemType))
+				gem.GrabAnim ();
+			else
+				gem.GetComponentInChildren<Animator> ().SetTrigger ("Reject");
         }
     }
 
@@ -126,6 +153,7 @@ public class GemManager : MonoBehaviour {
         }
 
         types[i] = GemType.None;
+		currentColors [i] = colors [(int)GemType.None];
         amounts[i] = 0;
 
         GemUIManager.Instance.AddGem(i,GemType.None,0);

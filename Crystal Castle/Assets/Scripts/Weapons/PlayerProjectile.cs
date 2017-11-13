@@ -12,6 +12,8 @@ public class PlayerProjectile : Projectile {
 	public float vampireRecovery = 0f;
     public bool destroyOnHit = true;
 
+	public SpriteRenderer[] sprites;
+
 
 	protected override void OnAwake () {
 		health = GameObject.Find ("Player1").GetComponent<PlayerHealth> ();
@@ -22,6 +24,12 @@ public class PlayerProjectile : Projectile {
         if (collider.tag == "Enemy")
         {
             collider.GetComponent<EnemyHealth>().TakeDamage(damage);
+
+			if (vampireRecovery > 0) {
+				health.TakeDamage (-vampireRecovery);
+				ParticleManager.Instance.EmitLifeStealParticles("LifeSteal", collider.bounds.ClosestPoint (transform.position), 7);
+
+			}
             OnHit(collider);
         }
         else if (bounces > 0)
@@ -65,8 +73,7 @@ public class PlayerProjectile : Projectile {
         }
         //Reset
         bounces = 0;
-		if (vampireRecovery > 0)
-			health.TakeDamage (-vampireRecovery);
+		vampireRecovery = 0;
 
         if (destroyOnHit)
         {

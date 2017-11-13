@@ -23,9 +23,20 @@ public class ParticleManager : MonoBehaviour {
         }
 	}
 	
-    public void EmitAt(string name ,Vector3 position,int ammount)
+    public void EmitAt(string name, Vector3 position, int amount)
     {
         particles[name].transform.position = position;
-        particles[name].Emit(ammount);
+        particles[name].Emit(amount);
     }
+
+
+	public void EmitLifeStealParticles(string name, Vector3 position, int amount) {
+		//EmitAt (name, position, amount);
+
+		particles[name].transform.position = position;
+		particles [name].Stop ();
+		particles [name].Play ();
+
+		particles [name].GetComponent<LifeStealParticles> ().enabled = true;
+	}
 }

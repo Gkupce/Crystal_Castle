@@ -25,6 +25,11 @@ public class ProjectileWeapon : Weapon {
 
         bullet.transform.position = transform.position;
 
+		PlayerProjectile projectile = bullet.GetComponent<PlayerProjectile>();
+		for (short i = 0; i < projectile.sprites.Length; i++) {
+			projectile.sprites [i].color = gemManager.currentColors [i];
+		}
+
 
         Vector3 diff = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         diff.Normalize();
