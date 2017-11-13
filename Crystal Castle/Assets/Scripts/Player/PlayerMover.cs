@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMover : MonoBehaviour {
-	public float maxSpeed = 1.0f;
+	const float MAX_SPEED = 7.0f;
+	float speed = MAX_SPEED;
 	private Rigidbody2D rBody;
 	private Animator anim;
 
+	public ParticleSystem focusParticles;
 	public ParticleSystem sweatParticles;
 	public float feintCooldown;
 	private bool feintAvailable = true;
@@ -30,9 +32,17 @@ public class PlayerMover : MonoBehaviour {
 		{
 			direction = direction.normalized;
 		}
+		if (Input.GetAxis ("Focus") > 0.1f) {
+			FocusParticles (true);
+			speed = MAX_SPEED / 2.3f;
+		} else {
+			FocusParticles (false);
+			speed = MAX_SPEED;
+		}
+
 		if(direction.magnitude > 0.01f)
 		{
-			rBody.velocity = direction * maxSpeed;
+			rBody.velocity = direction * speed;
 		}
 		else
 		{
@@ -82,6 +92,15 @@ public class PlayerMover : MonoBehaviour {
 			anim.SetTrigger("Feint");
 			feintAvailable = false;
 		}
+	}
+
+
+	private void FocusParticles (bool status) {
+		if (status) {
+			if (focusParticles.isStopped)
+				focusParticles.Play ();
+		} else
+			focusParticles.Stop ();
 	}
 
 

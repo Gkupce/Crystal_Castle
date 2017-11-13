@@ -14,6 +14,7 @@ public class PlayerHealth : Health {
 
 
 	protected override void OnHit () {
+		ParticleManager.Instance.EmitAt ("EnemyExplosion", transform.position, 4);
 		StartCoroutine (Immortal ());
 		heart.UpdateHeart (health / 100f);
 	}
