@@ -26,8 +26,10 @@ public class ProjectileWeapon : Weapon {
         bullet.transform.position = transform.position;
 
 		PlayerProjectile projectile = bullet.GetComponent<PlayerProjectile>();
-		for (short i = 0; i < projectile.sprites.Length; i++) {
-			projectile.sprites [i].color = gemManager.currentColors [i];
+		for (short i = 0; i < projectile.particles.Length; i++) {
+			ParticleSystem.MainModule m = projectile.particles [i].main;
+			m.startColor = gemManager.currentColors [i];
+			projectile.playParticles [i] = gemManager.currentColors [i] != Color.white;
 		}
 
 

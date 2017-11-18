@@ -20,7 +20,11 @@ public class Projectile : MonoBehaviour {
     {
         deleteTimer = 5f;
         rBody.velocity = transform.up * speed;
+		WhenEnabled ();
+
     }
+
+	protected virtual void WhenEnabled () {	}
 
     private void Update()
     {

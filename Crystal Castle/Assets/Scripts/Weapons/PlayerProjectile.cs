@@ -12,11 +12,23 @@ public class PlayerProjectile : Projectile {
 	public float vampireRecovery = 0f;
     public bool destroyOnHit = true;
 
-	public SpriteRenderer[] sprites;
+	public ParticleSystem[] particles;
+
+	[HideInInspector]
+	public bool[] playParticles = new bool [2];
+
 
 
 	protected override void OnAwake () {
 		health = GameObject.Find ("Player1").GetComponent<PlayerHealth> ();
+	}
+
+
+	protected override void WhenEnabled () {
+		for (short i = 0; i < particles.Length; i++) {
+			if (playParticles [i])
+				particles [i].Play ();
+		}
 	}
 
 
