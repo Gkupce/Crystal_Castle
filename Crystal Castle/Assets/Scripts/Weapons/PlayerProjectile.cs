@@ -26,8 +26,11 @@ public class PlayerProjectile : Projectile {
 
 	protected override void WhenEnabled () {
 		for (short i = 0; i < particles.Length; i++) {
-			if (playParticles [i])
-				particles [i].Play ();
+            if (playParticles[i])
+            {
+                particles[i].Stop();
+                particles[i].Play();
+            }
 		}
 	}
 
