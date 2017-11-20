@@ -19,9 +19,8 @@ public class Projectile : MonoBehaviour {
     private void OnEnable()
     {
         deleteTimer = 5f;
-        rBody.velocity = transform.up * speed;
+		CalculateSpeed();
 		WhenEnabled ();
-
     }
 
 	protected virtual void WhenEnabled () {	}
@@ -34,4 +33,19 @@ public class Projectile : MonoBehaviour {
             gameObject.SetActive(false);
         }
     }
+
+	public void CalculateSpeed()
+	{
+		rBody.velocity = transform.up * speed;
+	}
+
+	private void OnDrawGizmosSelected()
+	{
+		Gizmos.color = Color.red;
+		Gizmos.DrawLine(transform.position, transform.position + transform.up);
+		Gizmos.color = Color.green;
+		Gizmos.DrawLine(transform.position, transform.position + transform.right);
+		Gizmos.color = Color.blue;
+		Gizmos.DrawLine(transform.position, transform.position + transform.forward);
+	}
 }

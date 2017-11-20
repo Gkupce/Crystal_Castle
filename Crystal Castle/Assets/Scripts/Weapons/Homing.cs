@@ -26,7 +26,8 @@ public class Homing : MonoBehaviour {
         if (target)
         {
             transform.rotation = Quaternion.Lerp(transform.rotation,GetRot(),rotSpeed * Time.deltaTime);
-            float d = Vector3.Distance(transform.position,target.position);
+			gameObject.GetComponent<Projectile>().CalculateSpeed();
+			float d = Vector3.Distance(transform.position,target.position);
             if (d > lastDist)
             {
                 target = null;
