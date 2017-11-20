@@ -18,9 +18,9 @@ public class GemManager : MonoBehaviour {
     GemType[] types = new GemType[2] { GemType.None, GemType.None };
 	Color[] colors = {	
 						Color.white,
-						new Color (0.337f, 0.761f, 0.859f),			// Light-blue
+						new Color (0.237f, 0.661f, 0.959f),			// Light-blue
 						new Color (0.834f, 0.855f, 0.310f),			// Yellow
-						new Color (0.310f, 0.855f, 0.580f),			// Green
+						new Color (0.310f, 0.955f, 0.310f),			// Green
 						new Color (0.859f, 0.337f, 0.596f),			// Violet
 						new Color (0.871f, 0.349f, 0.349f)			// Red
 	};
