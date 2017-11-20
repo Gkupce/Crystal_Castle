@@ -32,19 +32,21 @@ public class Health : MonoBehaviour {
 	public void SetPoison(float amount) {
 		if (!poisoned) {
 			poisoned = true;
+            GetComponentInChildren<SpriteRenderer>().color = new Color(0.9f,0.1f,0.9f);
 			StartCoroutine (Poisoned (amount));
 		}
 	}
 
 
 	IEnumerator Poisoned(float amount) {
-		while (health > 0f && poisoned) {
+        int hits = 7;
+		while (health > 0f && hits > 0) {
 			yield return new WaitForSeconds (0.7f);
 			ParticleManager.Instance.EmitAt("Poison", transform.position, 7);
 			TakeDamage (amount);
-			yield return new WaitForSeconds (3.0f);
-			poisoned = false;
+            hits--;
 		}
 		poisoned = false;
-	}
+        GetComponentInChildren<SpriteRenderer>().color = Color.white;
+    }
 }
