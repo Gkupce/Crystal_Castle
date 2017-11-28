@@ -15,6 +15,8 @@ public class GemManager : MonoBehaviour {
 		Count
     }
 
+	public const int MAX_GEMS = 7;
+
     GemType[] types = new GemType[2] { GemType.None, GemType.None };
 	Color[] colors = {	
 						Color.white,
@@ -27,7 +29,7 @@ public class GemManager : MonoBehaviour {
 
 	public Color[] currentColors = { Color.white, Color.white };
 
-    int[] amounts = new int[2] { 0, 0 };
+	int[] amounts = new int[2] { 0, 0 };
 
     public GameObject[] bombPrefs;
 
@@ -68,8 +70,12 @@ public class GemManager : MonoBehaviour {
 		{
 			if (types[slot] == gemType)
 			{
-				amounts[slot]++;
+				if (amounts [slot] < MAX_GEMS)
+					amounts [slot]++;
+				else
+					return false;
 			}
+
 			if (types[slot] == GemType.None)
 			{
 				types[slot] = gemType;

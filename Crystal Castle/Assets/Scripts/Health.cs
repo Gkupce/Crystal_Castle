@@ -34,11 +34,12 @@ public class Health : MonoBehaviour {
 			poisoned = true;
             GetComponentInChildren<SpriteRenderer>().color = new Color(0.9f,0.1f,0.9f);
 			StartCoroutine (Poisoned (amount));
+			StartCoroutine (HealPoison ());
 		}
 	}
 
 
-	IEnumerator Poisoned(float amount) {
+	private IEnumerator Poisoned(float amount) {
         int hits = 7;
 		while (health > 0f && hits > 0) {
 			yield return new WaitForSeconds (0.7f);
@@ -49,4 +50,10 @@ public class Health : MonoBehaviour {
 		poisoned = false;
         GetComponentInChildren<SpriteRenderer>().color = Color.white;
     }
+
+
+	private IEnumerator HealPoison() {
+		yield return new WaitForSeconds (3.0f);
+		poisoned = false;
+	}
 }
