@@ -33,7 +33,7 @@ public class GemManager : MonoBehaviour {
 
     public GameObject[] bombPrefs;
 
-	public GemText gemText;
+	private GemText gemText;
 
     public GemType[] Types
     {
@@ -113,7 +113,9 @@ public class GemManager : MonoBehaviour {
 			Gem gem = collision.GetComponent<Gem> ();
 			if (PickUpGem (gem.gemType)) {
 				gem.GrabAnim ();
-				gemText.Show (gem.transform.position);
+				if (gemText == null)
+					gemText = GameObject.FindWithTag ("GemText").GetComponent<GemText> ();
+				gemText.Show (gem);
 			}	
 			else
 				gem.GetComponentInChildren<Animator> ().SetTrigger ("Reject");
