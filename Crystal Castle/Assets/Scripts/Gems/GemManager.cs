@@ -33,6 +33,8 @@ public class GemManager : MonoBehaviour {
 
     public GameObject[] bombPrefs;
 
+	public GemText gemText;
+
     public GemType[] Types
     {
         get
@@ -109,8 +111,10 @@ public class GemManager : MonoBehaviour {
         if(collision.tag == "Crystal")
         {
 			Gem gem = collision.GetComponent<Gem> ();
-			if (PickUpGem (gem.gemType))
+			if (PickUpGem (gem.gemType)) {
 				gem.GrabAnim ();
+				gemText.Show (gem.transform.position);
+			}	
 			else
 				gem.GetComponentInChildren<Animator> ().SetTrigger ("Reject");
         }
