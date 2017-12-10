@@ -28,6 +28,10 @@ public class EnemyWeapon : MonoBehaviour {
     }
 
     void Update () {
+        if(GameController.Instance.allowControl == false)
+        {
+            return;
+        }
         if (actualDelay > 0)
         {
             actualDelay -= Time.deltaTime;
