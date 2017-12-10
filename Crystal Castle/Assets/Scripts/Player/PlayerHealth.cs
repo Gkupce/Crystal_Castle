@@ -17,6 +17,7 @@ public class PlayerHealth : Health {
 		ParticleManager.Instance.EmitAt ("EnemyExplosion", transform.position, 4);
 		StartCoroutine (Immortal ());
 		heart.UpdateHeart (health / 100f);
+        SoundManager.PlayClip(0);
 	}
 
     protected override void OnHealthUp()

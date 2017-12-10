@@ -41,6 +41,8 @@ public class ProjectileWeapon : Weapon {
 
         SetGemsEffect(bullet);
         bullet.SetActive(true);
+
+        SoundManager.PlayClip(2,0.8f,1.2f);
     }
 
 
