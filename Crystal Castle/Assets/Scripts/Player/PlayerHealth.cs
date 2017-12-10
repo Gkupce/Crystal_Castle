@@ -28,8 +28,16 @@ public class PlayerHealth : Health {
 
     private IEnumerator Immortal () {
 		immortal = true;
-		yield return new WaitForSeconds (1f);
-		immortal = false;
+        while (GameController.Instance.allowControl == false)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        yield return new WaitForSeconds (1f);
+        while (GameController.Instance.allowControl == false)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        immortal = false;
 	}
 
 

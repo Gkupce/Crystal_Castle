@@ -27,6 +27,10 @@ public class Projectile : MonoBehaviour {
 
     private void Update()
     {
+        if(GameController.Instance.allowControl == false)
+        {
+            return;
+        }
         deleteTimer -= Time.deltaTime;
         if (deleteTimer <= 0)
         {
