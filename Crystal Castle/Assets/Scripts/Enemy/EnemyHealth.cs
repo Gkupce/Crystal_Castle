@@ -11,4 +11,10 @@ public class EnemyHealth : Health {
 		GemThrower.Instance.ThrowGem (transform.position);
         Destroy(gameObject);
     }
+
+    protected override void OnHit()
+    {
+        SoundManager.PlayClip(1);
+        base.OnHit();
+    }
 }

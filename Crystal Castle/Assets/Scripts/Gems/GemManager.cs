@@ -86,6 +86,7 @@ public class GemManager : MonoBehaviour {
 			currentColors [slot] = colors[(int)gemType];
 
 			GemUIManager.Instance.AddGem(slot, gemType, amounts[slot]);
+            SoundManager.PlayClip(3);
 			return true;
 		}
 
