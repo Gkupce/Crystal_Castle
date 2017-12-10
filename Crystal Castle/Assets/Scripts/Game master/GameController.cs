@@ -134,10 +134,6 @@ public class GameController : MonoBehaviour {
 
     IEnumerator DeathRoutine()
     {
-        while (GameController.Instance.allowControl == false)
-        {
-            yield return new WaitForEndOfFrame();
-        }
         yield return new WaitForSeconds(1f);
         anim.SetTrigger("FadeOut");
         while (GameController.Instance.allowControl == false)
@@ -145,10 +141,6 @@ public class GameController : MonoBehaviour {
             yield return new WaitForEndOfFrame();
         }
         yield return new WaitForSeconds(1f);
-        while (GameController.Instance.allowControl == false)
-        {
-            yield return new WaitForEndOfFrame();
-        }
         SceneManager.LoadScene((int)Enums.Scenes.MENU);
     }
 
