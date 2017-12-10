@@ -48,7 +48,7 @@ public class Homing : MonoBehaviour {
         {
             while (GameController.Instance.allowControl == false)
             {
-                continue;
+                yield return new WaitForEndOfFrame();
             }
             foreach (Collider2D c in Physics2D.OverlapCircleAll(transform.position, 8f, targetLayer))
             {

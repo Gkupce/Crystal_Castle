@@ -52,7 +52,7 @@ public class Health : MonoBehaviour {
         {
             while (GameController.Instance.allowControl == false)
             {
-                continue;
+                yield return new WaitForEndOfFrame();
             }
             yield return new WaitForSeconds (0.7f);
 			ParticleManager.Instance.EmitAt("Poison", transform.position, 7);
@@ -68,12 +68,12 @@ public class Health : MonoBehaviour {
     {
         while (GameController.Instance.allowControl == false)
         {
-            continue;
+            yield return new WaitForEndOfFrame();
         }
         yield return new WaitForSeconds (3.0f);
         while (GameController.Instance.allowControl == false)
         {
-            continue;
+            yield return new WaitForEndOfFrame();
         }
         poisoned = false;
 	}

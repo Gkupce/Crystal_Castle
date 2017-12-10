@@ -25,12 +25,12 @@ public class Gem : MonoBehaviour {
 	public IEnumerator Vanish () {
         while (GameController.Instance.allowControl == false)
         {
-            continue;
+            yield return new WaitForEndOfFrame();
         }
 		yield return new WaitForSeconds (3f);
         while (GameController.Instance.allowControl == false)
         {
-            continue;
+            yield return new WaitForEndOfFrame();
         }
         anim.SetTrigger ("Vanish");
 		Destroy (gameObject, 2f);

@@ -30,12 +30,12 @@ public class PlayerHealth : Health {
 		immortal = true;
         while (GameController.Instance.allowControl == false)
         {
-            continue;
+            yield return new WaitForEndOfFrame();
         }
         yield return new WaitForSeconds (1f);
         while (GameController.Instance.allowControl == false)
         {
-            continue;
+            yield return new WaitForEndOfFrame();
         }
         immortal = false;
 	}

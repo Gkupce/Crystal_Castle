@@ -136,18 +136,18 @@ public class GameController : MonoBehaviour {
     {
         while (GameController.Instance.allowControl == false)
         {
-            continue;
+            yield return new WaitForEndOfFrame();
         }
         yield return new WaitForSeconds(1f);
         anim.SetTrigger("FadeOut");
         while (GameController.Instance.allowControl == false)
         {
-            continue;
+            yield return new WaitForEndOfFrame();
         }
         yield return new WaitForSeconds(1f);
         while (GameController.Instance.allowControl == false)
         {
-            continue;
+            yield return new WaitForEndOfFrame();
         }
         SceneManager.LoadScene((int)Enums.Scenes.MENU);
     }

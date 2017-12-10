@@ -76,12 +76,12 @@ public class StoryIntro : StoryPart {
     {
         while (GameController.Instance.allowControl == false)
         {
-            continue;
+            yield return new WaitForEndOfFrame();
         }
         yield return new WaitForSeconds(1f);
         while (GameController.Instance.allowControl == false)
         {
-            continue;
+            yield return new WaitForEndOfFrame();
         }
         fade.SetTrigger("FadeOut");
         NextScene();

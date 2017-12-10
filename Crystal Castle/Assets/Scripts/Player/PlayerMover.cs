@@ -108,12 +108,12 @@ public class PlayerMover : MonoBehaviour {
     {
         while (GameController.Instance.allowControl == false)
         {
-            continue;
+            yield return new WaitForEndOfFrame();
         }
         yield return new WaitForSeconds(feintCooldown);
         while (GameController.Instance.allowControl == false)
         {
-            continue;
+            yield return new WaitForEndOfFrame();
         }
         feintAvailable = true;
 		sweatParticles.Stop ();
