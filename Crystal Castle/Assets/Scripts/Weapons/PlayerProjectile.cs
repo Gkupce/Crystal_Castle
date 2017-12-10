@@ -41,7 +41,7 @@ public class PlayerProjectile : Projectile {
             collider.GetComponent<EnemyHealth>().TakeDamage(damage);
 
 			if (vampireRecovery > 0) {
-				health.TakeDamage (-vampireRecovery);
+				health.GetHealth (-vampireRecovery);
 				ParticleManager.Instance.EmitLifeStealParticles("LifeSteal", collider.bounds.ClosestPoint (transform.position), 7);
 
 			}

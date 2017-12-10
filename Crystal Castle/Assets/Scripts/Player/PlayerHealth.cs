@@ -19,8 +19,14 @@ public class PlayerHealth : Health {
 		heart.UpdateHeart (health / 100f);
 	}
 
+    protected override void OnHealthUp()
+    {
+        base.OnHealthUp();
+        heart.UpdateHeart(health / 100f);
+    }
 
-	private IEnumerator Immortal () {
+
+    private IEnumerator Immortal () {
 		immortal = true;
 		yield return new WaitForSeconds (1f);
 		immortal = false;
