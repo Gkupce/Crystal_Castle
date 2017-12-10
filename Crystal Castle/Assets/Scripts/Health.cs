@@ -22,8 +22,15 @@ public class Health : MonoBehaviour {
         }
     }
 
+    public void GetHealth(float amount)
+    {
+        health = Mathf.Clamp(health + amount, 0, 100);
+        OnHealthUp();
+    }
 
-	protected virtual void OnHit () {	}
+    protected virtual void OnHealthUp() { }
+
+    protected virtual void OnHit () {	}
 
 
     protected virtual void OnDeath() {	}
