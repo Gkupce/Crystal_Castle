@@ -6,8 +6,8 @@ public class PooledGameObject : MonoBehaviour {
 
     public string pool;
 
-    void OnDisable()
-    {
+
+    void OnDisable () {
         GameObjectPools.Instance.ReturnToPool(pool, gameObject);
     }
 }

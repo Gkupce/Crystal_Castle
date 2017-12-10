@@ -8,16 +8,20 @@ public class GemText : MonoBehaviour {
 	public UnityEngine.UI.Text text;
 
 
+	private void Awake () {
+		transform.SetParent (GameObject.FindWithTag ("Canvas").transform);
+	} 
+
+
 	public void Show (Gem gem) {
 		SetText (gem);
 		transform.position = Camera.main.WorldToScreenPoint (gem.transform.position);
-		anim.SetTrigger ("Show");
+		anim.Play ("Show");
 	}
 
 
 	private void SetText (Gem gem) {
-		switch (gem.gemType)
-		{
+		switch (gem.gemType) {
 			case GemManager.GemType.Speed:
 				text.text = "Speed+";
 				break;
