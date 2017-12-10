@@ -46,7 +46,11 @@ public class Homing : MonoBehaviour {
         float minAngleDif = maxAngleDif;
         while(target == null)
         {
-            foreach(Collider2D c in Physics2D.OverlapCircleAll(transform.position, 8f, targetLayer))
+            while (GameController.Instance.allowControl == false)
+            {
+                continue;
+            }
+            foreach (Collider2D c in Physics2D.OverlapCircleAll(transform.position, 8f, targetLayer))
             {
                 if(c == null)
                 {

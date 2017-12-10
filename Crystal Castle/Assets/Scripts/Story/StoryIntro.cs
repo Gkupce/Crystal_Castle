@@ -72,8 +72,17 @@ public class StoryIntro : StoryPart {
     }
 
 
-    IEnumerator Finish() {
+    IEnumerator Finish()
+    {
+        while (GameController.Instance.allowControl == false)
+        {
+            continue;
+        }
         yield return new WaitForSeconds(1f);
+        while (GameController.Instance.allowControl == false)
+        {
+            continue;
+        }
         fade.SetTrigger("FadeOut");
         NextScene();
     }

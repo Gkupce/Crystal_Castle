@@ -134,10 +134,22 @@ public class GameController : MonoBehaviour {
 
     IEnumerator DeathRoutine()
     {
+        while (GameController.Instance.allowControl == false)
+        {
+            continue;
+        }
         yield return new WaitForSeconds(1f);
         anim.SetTrigger("FadeOut");
+        while (GameController.Instance.allowControl == false)
+        {
+            continue;
+        }
         yield return new WaitForSeconds(1f);
-		SceneManager.LoadScene((int)Enums.Scenes.MENU);
+        while (GameController.Instance.allowControl == false)
+        {
+            continue;
+        }
+        SceneManager.LoadScene((int)Enums.Scenes.MENU);
     }
 
     public void ShowEndPopup()
