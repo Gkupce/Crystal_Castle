@@ -15,8 +15,10 @@ public class GemManager : MonoBehaviour {
 		Count
     }
 
-    GemType[] types = new GemType[2] { GemType.None, GemType.None };
-	Color[] colors = {	
+	public const int MAX_GEMS = 7;
+
+    private GemType[] types = new GemType[2] { GemType.None, GemType.None };
+	private Color[] colors = {	
 						Color.white,
 						new Color (0.237f, 0.661f, 0.959f),			// Light-blue
 						new Color (0.834f, 0.855f, 0.310f),			// Yellow
@@ -27,9 +29,9 @@ public class GemManager : MonoBehaviour {
 
 	public Color[] currentColors = { Color.white, Color.white };
 
-    int[] amounts = new int[2] { 0, 0 };
+	int[] amounts = new int[2] { 0, 0 };
 
-    public GameObject[] bombPrefs;
+	public GameObject[] bombPrefs;
 
     public GemType[] Types
     {
@@ -68,8 +70,12 @@ public class GemManager : MonoBehaviour {
 		{
 			if (types[slot] == gemType)
 			{
-				amounts[slot]++;
+				if (amounts [slot] < MAX_GEMS)
+					amounts [slot]++;
+				else
+					return false;
 			}
+
 			if (types[slot] == GemType.None)
 			{
 				types[slot] = gemType;
@@ -103,8 +109,10 @@ public class GemManager : MonoBehaviour {
         if(collision.tag == "Crystal")
         {
 			Gem gem = collision.GetComponent<Gem> ();
-			if (PickUpGem (gem.gemType))
+			if (PickUpGem (gem.gemType)) {
 				gem.GrabAnim ();
+				GameObjectPools.Instance.GetPooledObject ("GemText").GetComponent<GemText> ().Show (gem);
+			}	
 			else
 				gem.GetComponentInChildren<Animator> ().SetTrigger ("Reject");
         }

@@ -13,6 +13,8 @@ public class GemUIManager : MonoBehaviour {
 
     public static GemUIManager Instance;
 
+	private const string MAX = "MAX";
+
 
     private void Awake()
     {
@@ -29,6 +31,7 @@ public class GemUIManager : MonoBehaviour {
 		UIButtonHints [index].enabled = type == GemManager.GemType.None;
 
         UICrystalImages [index].sprite = crystalSprites [(int)type];
-        UICrystalAmountLabels [index].text = (amount == 0 ? "" : amount.ToString());
+		UICrystalAmountLabels [index].fontSize = (amount == GemManager.MAX_GEMS ? 20 : 30);
+		UICrystalAmountLabels [index].text = (amount == 0 ? "" : amount == GemManager.MAX_GEMS ? MAX : amount.ToString());
     }
 }
