@@ -48,9 +48,18 @@ public class Health : MonoBehaviour {
 
 	private IEnumerator Poisoned(float amount) {
         int hits = 7;
-		while (health > 0f && hits > 0) {
-			yield return new WaitForSeconds (0.7f);
-			ParticleManager.Instance.EmitAt("Poison", transform.position, 7);
+		while (health > 0f && hits > 0)
+        {
+            float waitTime = 0.7f;
+            while(waitTime > 0f)
+            {
+                if (GameController.Instance.allowControl)
+                {
+                    waitTime -= Time.deltaTime;
+                }
+                yield return null;
+            }
+            ParticleManager.Instance.EmitAt("Poison", transform.position, 7);
 			TakeDamage (amount);
             hits--;
 		}
@@ -59,8 +68,17 @@ public class Health : MonoBehaviour {
     }
 
 
-	private IEnumerator HealPoison() {
-		yield return new WaitForSeconds (3.0f);
-		poisoned = false;
+	private IEnumerator HealPoison()
+    {
+        while (GameController.Instance.allowControl == false)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        yield return new WaitForSeconds (3.0f);
+        while (GameController.Instance.allowControl == false)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        poisoned = false;
 	}
 }
