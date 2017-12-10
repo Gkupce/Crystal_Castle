@@ -7,13 +7,15 @@ public class SoundManager : MonoBehaviour {
     public AudioClip[] clips;
 
     AudioSource aSrc;
+    AudioSource aSrcP;
     static SoundManager instance;
 
 	// Use this for initialization
 	void Start () {
         instance = this;
         aSrc = GetComponent<AudioSource>();
-	}
+        aSrcP = transform.GetChild(0).GetComponent<AudioSource>();
+    }
 	
     public static void PlayClip(int index)
     {
@@ -22,7 +24,7 @@ public class SoundManager : MonoBehaviour {
     }
     public static void PlayClip(int index,float minPitch,float maxPitch)
     {
-        instance.aSrc.pitch = Random.Range(minPitch,maxPitch);
-        instance.aSrc.PlayOneShot(instance.clips[index]);
+        instance.aSrcP.pitch = Random.Range(minPitch,maxPitch);
+        instance.aSrcP.PlayOneShot(instance.clips[index]);
     }
 }
