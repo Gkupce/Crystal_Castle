@@ -55,7 +55,11 @@ public class Health : MonoBehaviour {
                 yield return new WaitForEndOfFrame();
             }
             yield return new WaitForSeconds (0.7f);
-			ParticleManager.Instance.EmitAt("Poison", transform.position, 7);
+            while (GameController.Instance.allowControl == false)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+            ParticleManager.Instance.EmitAt("Poison", transform.position, 7);
 			TakeDamage (amount);
             hits--;
 		}
