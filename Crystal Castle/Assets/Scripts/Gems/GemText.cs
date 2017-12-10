@@ -10,6 +10,7 @@ public class GemText : MonoBehaviour {
 
 	private void Awake () {
 		transform.SetParent (GameObject.FindWithTag ("Canvas").transform);
+        transform.localScale = Vector3.one;
 	} 
 
 
