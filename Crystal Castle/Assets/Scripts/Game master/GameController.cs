@@ -53,23 +53,26 @@ public class GameController : MonoBehaviour {
 	
 	private void Update()
 	{
-		if (Input.GetButtonUp("Pause"))
-		{
-			Pausable[] pausables = GameObject.FindObjectsOfType<Pausable>();
-			foreach (Pausable p in pausables)
-			{
-				if (pause)
-				{
-					p.Unpause();
-				}
-				else
-				{
-					p.Pause();
-				}
-			}
-			pause = !pause;
-			anim.SetBool("Paused", pause);
+		if (Input.GetButtonUp ("Pause")) {
+			Pause ();
 		}
+	}
+
+	public void Pause () {
+		Pausable[] pausables = GameObject.FindObjectsOfType<Pausable>();
+		foreach (Pausable p in pausables)
+		{
+			if (pause)
+			{
+				p.Unpause();
+			}
+			else
+			{
+				p.Pause();
+			}
+		}
+		pause = !pause;
+		anim.SetBool("Paused", pause);
 	}
 
 	public void LoadNextLevel()
