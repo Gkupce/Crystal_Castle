@@ -50,12 +50,16 @@ public class Health : MonoBehaviour {
         int hits = 7;
 		while (health > 0f && hits > 0)
         {
-            while (GameController.Instance.allowControl == false)
+            float waitTime = 0.7f;
+            while(waitTime > 0f)
             {
-                yield return new WaitForEndOfFrame();
+                if (GameController.Instance.allowControl)
+                {
+                    waitTime -= Time.deltaTime;
+                }
+                yield return null;
             }
-            yield return new WaitForSeconds (0.7f);
-			ParticleManager.Instance.EmitAt("Poison", transform.position, 7);
+            ParticleManager.Instance.EmitAt("Poison", transform.position, 7);
 			TakeDamage (amount);
             hits--;
 		}
