@@ -110,12 +110,16 @@ public class GemManager : MonoBehaviour {
         if(collision.tag == "Crystal")
         {
 			Gem gem = collision.GetComponent<Gem> ();
-			if (PickUpGem (gem.gemType)) {
-				gem.GrabAnim ();
-				GameObjectPools.Instance.GetPooledObject ("GemText").GetComponent<GemText> ().Show (gem);
-			}	
-			else
-				gem.GetComponentInChildren<Animator> ().SetTrigger ("Reject");
+            if (PickUpGem(gem.gemType))
+            {
+                gem.GrabAnim();
+                GameObjectPools.Instance.GetPooledObject("GemText").GetComponent<GemText>().Show(gem);
+            }
+            else
+            {
+                gem.GetComponentInChildren<Animator>().SetTrigger("Reject");
+                SoundManager.PlayClip(4);
+            }
         }
     }
 
